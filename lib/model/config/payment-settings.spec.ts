@@ -34,7 +34,10 @@ describe('PaymentSettings', () => {
         expect(paymentSettings.allServices.paymentFlowServiceInfoList.length).toBe(6);
         expect(paymentSettings.getServicesForFlow("sampleSale").paymentFlowServiceInfoList.length).toBe(6);
 
-        expect(paymentSettings.allServices.supportedDataKeys).toHaveLength(383);
+        expect(paymentSettings.allServices.supportedCurrencies).toHaveLength(3);
+        expect(paymentSettings.allServices.supportedPaymentMethods).toHaveLength(5);
+        expect(paymentSettings.allServices.supportedRequestTypes).toHaveLength(5);
+        expect(paymentSettings.allServices.getFlowServiceFromId("com.aevi.appflow.storage").displayName).toBe("AEVI Developer Data Storage");
     });
 
 });
