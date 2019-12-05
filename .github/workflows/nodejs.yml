@@ -2,11 +2,11 @@ name: Node CI
 
 on: 
   push:
-    branches: 
-      - develop
+    branches:       
       - feature/*
   pull_request:
     branches: 
+      - develop
       - master
 
 jobs:
