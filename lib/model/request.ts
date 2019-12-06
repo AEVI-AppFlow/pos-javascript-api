@@ -46,7 +46,7 @@ export class Request extends Jsonable {
         this.id = uuid();
     }
 
-    public static from(requestType: string, requestData?: AdditionalData): Request {
+    public static from(requestType: string, requestData: AdditionalData = new AdditionalData()): Request {
         var request = new Request();
         request.requestType = requestType;
         request.requestData = requestData;
