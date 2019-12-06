@@ -32,6 +32,14 @@ export class FlowEvent extends Jsonable {
         super();
     }
 
+    public static from(type: string, eventTrigger: string, data: AdditionalData = new AdditionalData()): FlowEvent {
+        var flowEvent = new FlowEvent();
+        flowEvent.type = type;
+        flowEvent.eventTrigger = eventTrigger;
+        flowEvent.data = data;
+        return flowEvent;
+    }
+
     public static fromJson(json: string): FlowEvent {
         return this.baseFromJson(json, FlowEvent);
     }
