@@ -58,6 +58,7 @@ export { TransactionResponse, TransactionResponseOutcome } from './model/transac
 
 export { Request } from './model/request';
 export { Response } from './model/response';
+export { ResponseQueryBuilder } from './model/response-query-builder';
 export { ResponseQuery } from './model/response-query';
 
 export { Device } from './model/device';
