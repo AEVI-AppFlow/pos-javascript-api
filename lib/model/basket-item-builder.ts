@@ -94,7 +94,7 @@ export class BasketItemBuilder {
      *
      * Defaults to 1 if not set.
      *
-     * See {@link #withMeasurement(float, String)} and {@link #withFractionalQuantity(float, String)} for scenarios where quantities have or may have a fractional part and a unit.
+     * See [[withMeasurement]] and [[withFractionalQuantity]] for scenarios where quantities have or may have a fractional part and a unit.
      *
      * @param quantity The item quantity
      * @return This builder
@@ -142,9 +142,9 @@ export class BasketItemBuilder {
     /**
      * Set the measurement of this item to support items measured in fractions with a unit, such as "1.25 kilograms".
      *
-     * The quantity (via {@link #withQuantity(int)} defaults to 1, but can also be set to represent multiple items, such as "2 x 1.25 kilograms".
+     * The quantity (via [[withQuantity]] defaults to 1, but can also be set to represent multiple items, such as "2 x 1.25 kilograms".
      *
-     * See {@link #withFractionalQuantity(float, String)} for a convenience function that sets quantity and measurement as per provided parameters.
+     * See [[withFractionalQuantity]] for a convenience function that sets quantity and measurement as per provided parameters.
      *
      * @param value The measurement value
      * @param unit  The unit (such as "kilograms" or "feet")
@@ -158,9 +158,9 @@ export class BasketItemBuilder {
     /**
      * Convenience method for scenarios where the quantity is represented as float/double internally in the client application.
      *
-     * If a unit is set, the provided values will be set as per {@link #withMeasurement(float, String)} and the quantity defaults to 1.
+     * If a unit is set, the provided values will be set as per [[withMeasurement]] and the quantity defaults to 1.
      *
-     * If no unit is set (null) and the provided quantity is a whole number, the value will be set as per {@link #withQuantity(int)}.
+     * If no unit is set (null) and the provided quantity is a whole number, the value will be set as per [[withQuantity]].
      *
      * If no unit is set and the provided quantity has a fractional part, an exception will be thrown as unit is mandatory for measurement.
      *
@@ -209,12 +209,12 @@ export class BasketItemBuilder {
     /**
      * Set the item amount value, inclusive of tax.
      *
-     * This is to be used for cases where modifiers (see {@link #withBaseAmountAndModifiers(float, BasketItemModifier...)} are not relevant and a client
+     * This is to be used for cases where modifiers (see [[withBaseAmountAndModifiers]] are not relevant and a client
      * just wants to set the absolute amount value of this item.
      *
      * Note that the amount value can be negative to represent discounts, etc.
      *
-     * See {@link #withBaseAmountAndModifiers(float, BasketItemModifier...)} to instead provide a base amount with modifiers applied.
+     * See [[withBaseAmountAndModifiers]] to instead provide a base amount with modifiers applied.
      *
      * @param amount The item amount value, inclusive of tax.
      * @return This builder
@@ -231,7 +231,7 @@ export class BasketItemBuilder {
     /**
      * Set the item base amount value together with any modifiers that are to be applied to this amount.
      *
-     * {@link #withAmount(long)} may NOT be called in combination with this - the amount field is in this case calculated
+     * [[withAmount]] may NOT be called in combination with this - the amount field is in this case calculated
      * from the base amount with modifiers applied, and then rounded.
      *
      * @param baseAmount          The base amount value (exclusive of modifiers)

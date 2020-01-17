@@ -63,7 +63,7 @@ export class AdditionalData extends Jsonable {
     /**
      * Add any arbitrary non-primitive object as value with an associated string based key.
      *
-     * This will overwrite any previous values with the same key. Clients need to call {@link #hasData(String)} to check whether a key already
+     * This will overwrite any previous values with the same key. Clients need to call [[hasData]] to check whether a key already
      * exists to avoid potential overwriting of existing values.
      *
      * Note that JsonOption is used here to store the type of the class so that it can be deserialised in higher level languages such as Java. 
