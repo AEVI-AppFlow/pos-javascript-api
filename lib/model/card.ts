@@ -19,6 +19,11 @@ import { InvalidArgumentError } from '../util/pre-conditions';
 
 import * as moment from 'moment';
 
+/**
+ * The card details representing the card presented during a transaction.
+ *
+ * All fields in this class are optional and the payment service used may or may not return all these values.
+ */
 @JsonObject("Card")
 export class Card {
 
@@ -52,6 +57,17 @@ export class Card {
         return !this.maskedPan && !this.cardholderName && !this.cardToken && !this.expiryDate && this.additionalData.isEmpty();
     }
 
+    /**
+     * Create and returns a new Card object from the parameters given
+     * 
+     * @param maskedPan The masked PAN of the card
+     * @param cardholderName The cardholder name from the card
+     * @param expiryDate The expiry date of the card in the format YYMM 
+     * @param token The token associated with this card
+     * @param additionalData Optionally any other additional card data such as EMV data etc.
+     * 
+     * @returns The newly created Card object
+     */
     public static from(maskedPan: string, cardholderName: string, expiryDate: string, token: Token, additionalData?: AdditionalData): Card {
         var card = new Card();
         if (!maskedPan || maskedPan.replace(/[ X]/g,'').length > Card.MAX_PAN_DIGITS_ALLOWED) {

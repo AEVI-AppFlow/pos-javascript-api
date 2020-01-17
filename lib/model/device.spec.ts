@@ -15,6 +15,11 @@ import { Device } from './device';
 
 describe('Device', () => {
   it('should create an instance', () => {
-    expect(new Device('', '')).toBeTruthy();
+    expect(new Device()).toBeTruthy();
+  });
+  it('should create from', () => {
+    var device = Device.from("1245452", "Best device eva");
+    expect(device.name).toBe("Best device eva");
+    expect(device.uid).toBe("1245452");
   });
 });

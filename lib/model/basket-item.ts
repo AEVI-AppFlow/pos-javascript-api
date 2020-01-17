@@ -17,6 +17,15 @@ import { Measurement } from "./measurement";
 import { BasketItemModifier } from "./basket-item-modifier";
 import { AdditionalData } from "./additional-data";
 
+/**
+ * Represents an immutable basket item with associated id, label, category, quantity (and optionally measurement) and amount.
+ *
+ * A basket item may have a positive or negative amount, representing both purchases and applied discounts.
+ *
+ * Additional information such as tax, add-ons, etc can be added as modifiers and other arbitrary data as item data.
+ *
+ * Please create instances via {@link BasketItemBuilder}.
+ */
 @JsonObject("BasketItem")
 export class BasketItem {
 
@@ -51,6 +60,21 @@ export class BasketItem {
 
     }
 
+    /**
+     * Create a new basket item with label, category, amount (inclusive of tax) and quantity.
+     *
+     * @param id          The identifier (SKU or similar) for this item
+     * @param label       The label of the item to show to merchants/customers, such as "Red onion"
+     * @param category    The category the item belongs to, such as "vegetables" or "dairy"
+     * @param amount      The amount (cost, rounded) for this (individual) item, inclusive of modifiers and tax
+     * @param baseAmount  The base amount (cost) for this (individual) item, exclusive of modifiers
+     * @param quantity    The quantity (count) of this basket item (default is 1, below 0 will produce an exception)
+     * @param measurement The measurement of this basket item (for items that are measured in fractions and require a unit)
+     * @param modifiers   The modifiers for the basket item
+     * @param itemData    The item additional data
+     * 
+     * @returns The new BasketItem instance
+     */
     public static from(id: string, label: string, category: string, amount: number, baseAmount: number, quantity: number, measurement?: Measurement, modifiers?: Array<BasketItemModifier>, itemData?: AdditionalData): BasketItem {
         let basketItem = new BasketItem();
         basketItem.id = id;

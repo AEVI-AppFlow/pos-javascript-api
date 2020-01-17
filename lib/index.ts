@@ -12,6 +12,8 @@
  *  limitations under the License.
  */
 export { 
+    AppMessageTypes,
+    ResponseMechanisms,
     AccountTypes,
     AdditionalDataKeys,
     AmountIdentifiers,
@@ -32,8 +34,11 @@ export {
     ReferenceKeys,
     ServiceInfoDataKeys,
     SplitDataKeys,
-    StatusUpdateKeys
+    StatusUpdateKeys,
+    ErrorConstants
 } from './model/constants';
+
+export { AppMessage, InternalData } from './model/app-message';
 
 export { PaymentApi } from './payment-api';
 export { PaymentClient } from './payment-client';

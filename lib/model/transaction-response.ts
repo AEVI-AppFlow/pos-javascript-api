@@ -22,6 +22,9 @@ export enum TransactionResponseOutcome {
     DECLINED = "DECLINED"
 }
 
+/**
+ * A transaction response representing the outcome of processing a {@link TransactionRequest}.
+ */
 @JsonObject
 export class TransactionResponse {
 

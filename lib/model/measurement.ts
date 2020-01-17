@@ -13,6 +13,11 @@
  */
 import {JsonObject, JsonProperty} from "json2typescript";
 
+/**
+ * Represents a measurement with a value and unit.
+ *
+ * Examples are "2.5 kilograms" or "13.45 feet".
+ */
 @JsonObject
 export class Measurement {
 
@@ -26,6 +31,14 @@ export class Measurement {
 
     }
 
+    /**
+     * Create and return a measuremnet object from the values given
+     * 
+     * @param value The amount the measurement represents (can be a float if required)
+     * @param unit The unit of measurement e.g g, kg, m, cm, mm
+     * 
+     * @returns The newly created measurement object
+     */
     public static from(value: number, unit: string): Measurement {
         var m = new Measurement();
         m.value = value;

@@ -36,6 +36,11 @@ export enum FlowTypes {
     receiptDelivery = "receiptDelivery"
 }
 
+/**
+ * Payment model containing relevant information for initiating payments involving amounts.
+ *
+ * For other type of requests (such as reversals), please see {@link Request}
+ */
 @JsonObject("Payment")
 export class Payment extends Jsonable {
 
@@ -83,6 +88,13 @@ export class Payment extends Jsonable {
         this.id = uuid();
     }
 
+    /**
+     * Convert a JSON string into an {@link Payment} object if possible
+     * 
+     * @param json The JSON to convert
+     * 
+     * @returns A Payment object
+     */
     public static fromJson(json: string): Payment {
         return super.baseFromJson(json, Payment);
     }

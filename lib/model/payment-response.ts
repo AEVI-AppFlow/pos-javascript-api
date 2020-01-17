@@ -39,6 +39,13 @@ export enum FailureReason {
     ERROR = "ERROR"
 }
 
+/**
+ * Response for a previously made {@link Payment}.
+ *
+ * A payment can lead to a single or multiple transactions and it is up to the client to ensure this is taken into account.
+ *
+ * This class contains convenience methods to get overall information for the transaction processing.
+ */
 @JsonObject
 export class PaymentResponse extends Jsonable{
 
@@ -78,7 +85,12 @@ export class PaymentResponse extends Jsonable{
     @JsonProperty("executedPostFlowApp", FlowAppInfo, true)
     executedPostFlowApp: FlowAppInfo = undefined;
 
-    static fromJson(json: string): PaymentResponse {
+    /**
+     * Convert a JSON string into an {@link PaymentResponse} object if possible
+     * 
+     * @param json The JSON to convert
+     */
+    public static fromJson(json: string): PaymentResponse {
         return Jsonable.baseFromJson(json, PaymentResponse);
     }
 

@@ -42,6 +42,11 @@ export class AdditionalData extends Jsonable {
         super();
     }    
 
+    /**
+     * Convert a JSON string into an {@link AdditionalData} object if possible
+     * 
+     * @param json The JSON to convert
+     */
     public static fromJson(json: string) {
         return Jsonable.baseFromJson(json, AdditionalData);
     }
@@ -105,6 +110,8 @@ export class AdditionalData extends Jsonable {
      * Remove data with associated key from the collection.
      *
      * @param key The data key
+     * 
+     * @returns The value of the key removed
      */
     public removeData(key: string): any {
         var retVal = this.data[key];
@@ -132,7 +139,7 @@ export class AdditionalData extends Jsonable {
     /**
      * Get a set of all the keys for this data collection.
      *
-     * @return An iterator of data keys
+     * @return An array of data keys
      */
     public getKeys(): string[] {
         return Object.keys(this.data);

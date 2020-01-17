@@ -21,6 +21,9 @@ import { AdditionalData } from './additional-data';
 import { InvalidArgumentError } from '../util/pre-conditions';
 import { JsonOption } from '../util/json-option';
 
+/**
+ * Builder to construct {@link Payment} objects.
+ */
 export class PaymentBuilder{
 
     flowType: string;

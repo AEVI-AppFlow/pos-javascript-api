@@ -18,6 +18,12 @@ import { AdditionalData } from './additional-data';
 
 import { v4 as uuid } from 'uuid';
 
+/**
+ * Generic request that at minimum contains a request type and optionally flow name and bespoke request data.
+ *
+ * If a flow name is set, the flow with that name will be explicitly used. If not set, the request type will be used to look up eligible flows
+ * and one will be selected either automatically or via user interaction.
+ */
 @JsonObject
 export class Request extends Jsonable {
     @JsonProperty("id")
@@ -46,6 +52,20 @@ export class Request extends Jsonable {
         this.id = uuid();
     }
 
+    /**
+     * Initialise a request with a request type and data.
+     *
+     * The request type will be used to assign the correct flow for this request.
+     *
+     * Please see {@link #setFlowName(String)} to explicitly specify what flow to use.
+     *
+     * See reference values in the documentation for possible values.
+     *
+     * @param requestType The request type
+     * @param requestData The data for the request
+     * 
+     * @returns The initialised request
+     */
     public static from(requestType: string, requestData: AdditionalData = new AdditionalData()): Request {
         var request = new Request();
         request.requestType = requestType;
@@ -53,6 +73,13 @@ export class Request extends Jsonable {
         return request;
     }
 
+    /**
+     * Convert a JSON string into a {@link Request} object if possible
+     * 
+     * @param json The JSON to convert
+     * 
+     * @returns A Request object
+     */
     public static fromJson(json: string): Request {
         return this.baseFromJson(json, Request);
     }

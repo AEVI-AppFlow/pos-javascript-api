@@ -18,10 +18,13 @@ import { Jsonable } from "./jsonable";
 import { Request } from './request';
 import { AdditionalData } from './additional-data';
 
+/**
+ * Response to a generic {@link Request} that contains the outcome and bespoke response data for that request type.
+ */
 @JsonObject
 export class Response extends Jsonable {
 
-    @JsonProperty("originatingRequest", Request)
+    @JsonProperty("originatingRequest", Request, true)
     originatingRequest: Request = undefined;
 
     @JsonProperty("success")
@@ -43,6 +46,11 @@ export class Response extends Jsonable {
         super();
     }
 
+    /**
+     * Convert a JSON string into a {@link Response} object if possible
+     * 
+     * @param json The JSON to convert
+     */
     public static fromJson(json: string): Response {
         return this.baseFromJson(json, Response);
     }

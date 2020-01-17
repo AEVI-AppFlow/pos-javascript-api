@@ -15,6 +15,11 @@ import { Merchant } from './merchant';
 
 describe('Merchant', () => {
   it('should create an instance', () => {
-    expect(new Merchant("id", "name")).toBeTruthy();
+    expect(new Merchant()).toBeTruthy();
+  });
+
+  it('should create from', () => {
+    var merch = Merchant.from("1245452", "Shops'R'Us");
+    expect(merch.name).toBe("Shops'R'Us");
   });
 });
