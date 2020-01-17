@@ -14,6 +14,9 @@
 import { JsonObject, JsonProperty } from "json2typescript";
 import { Jsonable } from "./jsonable";
 
+/**
+ * Amount represented by a value in its subunit form (such as cents or pence) and currency (ISO 4217).
+ */
 @JsonObject("Amount")
 export class Amount extends Jsonable {
 
@@ -27,10 +30,23 @@ export class Amount extends Jsonable {
         super();
     }
 
+    /**
+     * Convert a JSON string into an {@link Amount} object if possible
+     * 
+     * @param json The JSON to convert
+     */
     public fromJson(json: string): Amount {
         return Jsonable.baseFromJson(json, Amount);
     }
 
+    /**
+     * Create a new Amount instance.
+     *
+     * @param value    The value in subunit form (cents, pence, etc)
+     * @param currency The ISO-4217 currency code
+     * 
+     * @returns The initialised amount object
+     */
     public static from(amount: number, currency: string): Amount {
         var a = new Amount();
         a.amount = amount;

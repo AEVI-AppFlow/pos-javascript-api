@@ -12,14 +12,20 @@
  *  limitations under the License.
  */
 import { JsonObject, JsonProperty } from "json2typescript";
+import { Jsonable } from "./jsonable";
 
-@JsonObject("Token")
-export class Token {
+/**
+ * Token that can be used to identify an entity, typically a customer or a merchant.
+ *
+ * How the value is generated is bespoke to the application that fulfilled the request.
+ */
+@JsonObject
+export class Token extends Jsonable {
 
-    @JsonProperty("value")
+    @JsonProperty("value", String)
     value: string = undefined;
 
-    @JsonProperty("source")
+    @JsonProperty("source", String)
     source: string = undefined;
     
     @JsonProperty("algorithm", String, true)
@@ -29,7 +35,7 @@ export class Token {
     sourceAppId: string = undefined;
 
     constructor() {
-
+        super();
     }
 
     public static from(value: string, source: string, algorithm?: string, sourceAppId?: string): Token {

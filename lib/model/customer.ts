@@ -33,6 +33,9 @@ export enum CustomerDataKeys {
     COUNTRY = "country"
 }
 
+/**
+ * Represents a paying customer with associated customer details and tokens.
+ */
 @JsonObject("Customer")
 export class Customer extends Jsonable {
 
@@ -53,6 +56,16 @@ export class Customer extends Jsonable {
         this.id = uuid();
     }
 
+    /**
+     * Creates and returns a new Customer object based on the details given
+     * 
+     * @param id The unique Id of the customer
+     * @param fullName The customers full name
+     * @param customerDetails Any other details to be associated with this customer see {@link CustomerDataKeys} for keys
+     * @param tokens Any tokens that should be associated with this customer
+     * 
+     * @returns The new Customer object
+     */
     public static from(id: string, fullName: string, customerDetails?: AdditionalData, tokens?: Array<Token>): Customer {
         var c = new Customer();
         c.id = id;
@@ -66,6 +79,11 @@ export class Customer extends Jsonable {
         return c;
     }
 
+    /**
+     * Convert a JSON string into an {@link Customer} object if possible
+     * 
+     * @param json The JSON to convert
+     */
     public static fromJson(json: string): Customer {
         return Jsonable.baseFromJson(json, Customer);
     }

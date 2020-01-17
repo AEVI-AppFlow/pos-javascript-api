@@ -18,12 +18,37 @@ import { BasketItem } from "./basket-item";
 import { AdditionalData } from "./additional-data";
 import { BasketItemBuilder } from "./basket-item-builder";
 
+/**
+ * Strategies for rounding decimal numbers.
+ */
 export enum RoundingStrategy {
+    /**
+     * Always round down. Both 15.2 and 15.9 is rounded to 15.
+     */
     DOWN = "DOWN",
+    /**
+     * Round to nearest. 15.2 is rounded to 15, and 15.9 is rounded to 16.
+     */
     NEAREST =  "NEAREST",
+    /**
+     * Always round up. Both 15.2 and 15.9 is rounded to 16.
+     */
     UP = "UP"
 }
 
+/**
+ * Represents a basket consisting of one or multiple {@link BasketItem}.
+ *
+ * Baskets are uniquely identified via a randomly generated id, and also contains a name as a readable identifier.
+ *
+ * Basket items are kept in a list sorted by most recently added first.
+ *
+ * Basket items are uniquely identified by an id, meaning it is possible that there is more than one item with the same label.
+ * It is up to the client to manage this correctly.
+ *
+ * Note that as basket items are immutable, any update to items (such as merging or changing quantity) leads to new instances being created. For the
+ * latest up to date item, always fetch via {@link #getItemById(String)}.
+ */
 @JsonObject("Basket")
 export class Basket extends Jsonable {
     @JsonProperty("basketName")
@@ -45,10 +70,23 @@ export class Basket extends Jsonable {
         super();
     }
 
+    /**
+     * Convert a JSON string into an {@link Basket} object if possible
+     * 
+     * @param json The JSON to convert
+     */
     public static fromJson(json: string) {
         return super.baseFromJson(json, Basket);
     }
 
+    /**
+     * Initialise a basket from the provided var-args items, maintaining the same order as they are specified in.
+     *
+     * @param basketName  The name of the basket
+     * @param basketItems The var-args list of basket items to initialise the basket with
+     * 
+     * @returns The new Basket object
+     */
     public static fromItems(name: string, ...basketItems: Array<BasketItem>): Basket {
         var basket: Basket = new Basket();
         basket.basketName = name;

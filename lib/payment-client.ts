@@ -21,6 +21,7 @@ import { ResponseQuery } from './model/response-query';
 import { FlowEvent } from './model/flow-event';
 import { Device } from './model/device';
 import { PaymentSettings } from './model/config/payment-settings';
+import { FlowException } from './model/flow-exception';
 
 export interface PaymentClient {
 
@@ -31,7 +32,7 @@ export interface PaymentClient {
      *
      * Subscribe to system events via {@link #subscribeToSystemEvents()} for updates when the state changes.
      *
-     * @return Single emitting a {@link PaymentSettings} instance
+     * @return Observable emitting the latest known {@link PaymentSettings} instance
      */
     getPaymentSettings(): Observable<PaymentSettings>;
 
@@ -40,16 +41,18 @@ export interface PaymentClient {
      *
      * Due to the nature of Android component lifecycles, AppFlow can not guarantee that your activity/service is still alive when a flow is complete,
      * meaning it may not be able to receive the response via this rx chain. To ensure that your application receives a response in a reliable way,
-     * your application must instead implement a {@link BaseResponseListenerService}.
+     * your application must instead subscribe to the {@link Response} asynchronously using {@link #subscribeToResponses}.
      *
-     * This method returns a {@link Completable} that will complete successfully if the request is accepted, or send an error if the request is invalid.
+     * This method returns a Promise that will resolve successfully if the request is accepted, or send an error if the request is invalid.
      *
-     * If your request is rejected or an error occurs during the flow, a {@link FlowException} will be delivered to the `onError` handler. This
-     * {@link FlowException} contains an error code that can be mapped to one of the constants in {@link ErrorConstants} and an error message
+     * If your request is rejected or an error occurs during the flow, a {@link FlowException} will be delivered to the observable that
+     * can be subscribed to from {@link #subscribeToResponseErrors} method. 
+     * 
+     * This {@link FlowException} contains an error code that can be mapped to one of the constants in {@link ErrorConstants} and an error message
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
      *
      * @param request The request
-     * @return Completable that represents the acceptance of the request
+     * @return Promise that represents the acceptance of the request
      */
     initiateRequest(request: Request): Promise<void>;
 
@@ -58,16 +61,18 @@ export interface PaymentClient {
      *
      * Due to the nature of Android component lifecycles, AppFlow can not guarantee that your activity/service is still alive when a flow is complete,
      * meaning it may not be able to receive the response via this rx chain. To ensure that your application receives a response in a reliable way,
-     * your application must instead implement a {@link BasePaymentResponseListenerService}.
+     * your application must instead subscribe to the {@link PaymentResponse} asynchronously using {@link #subscribeToPaymentResponses}.
      *
-     * This method returns a {@link Completable} that will complete successfully if the request is accepted, or send an error if the request is invalid.
+     * This method returns a Promise that will resolve successfully if the request is accepted, or send an error if the request is invalid.
      *
-     * If your request is rejected or an error occurs during the flow, a {@link FlowException} will be delivered to the `onError` handler. This
-     * {@link FlowException} contains an error code that can be mapped to one of the constants in {@link ErrorConstants} and an error message
+     * If your request is rejected or an error occurs during the flow, a {@link FlowException} will be delivered to the observable that
+     * can be subscribed to from {@link #subscribeToPaymentResponseErrors} method. 
+     * 
+     * This {@link FlowException} contains an error code that can be mapped to one of the constants in {@link ErrorConstants} and an error message
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
      *
      * @param payment The payment to process
-     * @return Completable that represents the acceptance of the request
+     * @return Promise that represents the acceptance of the request
      */
     initiatePayment(payment: Payment): Promise<void>;
 
@@ -106,7 +111,7 @@ export interface PaymentClient {
      *
      * You can subscribe to {@link #subscribeToSystemEvents()} for updates on changes to the available devices.
      *
-     * @return Single emitting a list of {@link Device} objects containing basic device info
+     * @return Observable stream emitting a list of {@link Device} objects containing basic device info
      */
     getDevices(): Observable<Array<Device>>;
 
@@ -127,9 +132,33 @@ export interface PaymentClient {
     subscribeToPaymentResponses(): Observable<PaymentResponse>;
 
     /**
+     * Subscribe to ALL payment response errors sent back to this application
+     *
+     * See {@link ErrorConstants} for details of the error codes that can be sent.
+     * The {@link FlowException} also contains a message that is intended to be used for debugging purposes only. 
+     * 
+     * This message is not intended for the end user (merchant). Instead the `errorCode` value should be used to lookup a suitable message for your user.
+     *  
+     * @return A stream that will emit response errors that are sent from the processing service.
+     */
+    subscribeToPaymentResponseErrors(): Observable<FlowException>
+
+    /**
      * Subscribe to generic responses that are sent asynchronously to this client
      * 
      * @retun A stream of {@link Response} that are sent for every {@link Request} requested
      */
     subscribeToResponses(): Observable<Response>
+
+    /**
+     * Subscribe to ALL generic response errors sent back to this application
+     * 
+     * See {@link ErrorConstants} for details of the error codes that can be sent.
+     * The {@link FlowException} also contains a message that is intended to be used for debugging purposes only. 
+     * 
+     * This message is not intended for the end user (merchant). Instead the `errorCode` value should be used to lookup a suitable message for your user.
+     * 
+     * @return A stream that will emit response errors that are sent from the processing service. 
+     */
+    subscribeToResponseErrors(): Observable<FlowException>
 }

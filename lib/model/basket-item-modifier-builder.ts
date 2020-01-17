@@ -14,6 +14,9 @@
 import { PreConditions } from '../util/pre-conditions';
 import { BasketItemModifier } from './basket-item-modifier';
 
+/**
+ * A builder to create {@link BasketItemModifier} instances
+ */
 export class BasketItemModifierBuilder {
     private id: string;
     private amount: number;

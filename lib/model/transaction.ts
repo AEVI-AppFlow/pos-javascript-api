@@ -21,6 +21,19 @@ import { TransactionResponse, TransactionResponseOutcome } from './transaction-r
 import { FlowAppInfo } from './flow-app-info';
 import { FlowStages } from './constants';
 
+/**
+ * Represents a transaction within a flow.
+ *
+ * In the case of a split enabled flow, there will be an instance of this class for each "split", which usually represents each customer.
+ *
+ * {@link TransactionRequest} instances are created as required to call flow services within this transaction, with the remaining amounts to process.
+ *
+ * A transaction can contain zero to many {@link TransactionResponse} instances, as a result of calling into flow services that pay off a portion
+ * or all of the requested amounts.
+ *
+ * Use {@link #getRequestedAmounts()} to retrieve the total amount requested for this transaction, and {@link #getRemainingAmounts()} to retrieve
+ * the amounts remaining to pay for this transaction, if any.
+ */
 @JsonObject
 export class Transaction {
 

@@ -17,6 +17,11 @@ import { PreConditions, InvalidArgumentError } from '../util/pre-conditions';
 import { Amount } from './amount';
 import { Jsonable } from "./jsonable";
 
+/**
+ * Representation of all the amounts relevant for a transaction.
+ *
+ * See {@link Amount} for representation of a single amount value with associated currency.
+ */
 @JsonObject("Amounts")
 export class Amounts extends Jsonable {
 
@@ -39,10 +44,24 @@ export class Amounts extends Jsonable {
         super();
     }
 
+    /**
+     * Convert a JSON string into an {@link Amounts} object if possible
+     * 
+     * @param json The JSON to convert
+     */
     public static fromJson(json: string): Amounts {
         return Jsonable.baseFromJson(json, Amounts);
     }
 
+    /**
+     * Initialise with base amount (inclusive of tax), currency and optional additional amounts map.
+     *
+     * @param baseAmount        The base amount, inclusive of tax, in subunit form (cents, pence, etc)
+     * @param currency          The ISO-4217 currency code
+     * @param additionalAmounts The additional amounts
+     * 
+     * @returns The initialised amounts object
+     */
     public static from(baseAmount = 0, currency = "XXX", additionalAmounts = {}): Amounts {
         var amounts = new Amounts();
         amounts.baseAmount = baseAmount;
@@ -51,6 +70,15 @@ export class Amounts extends Jsonable {
         return amounts;
     }
 
+    /**
+     * Initialise a new Amounts object from another one.
+     * 
+     * The method will create a new Amounts object cloned from the original
+     * 
+     * @param from The Amounts object to clone
+     * 
+     * @returns The initialised amounts object
+     */
     public static fromAmounts(from: Amounts): Amounts {
         var obj = Amounts.from(from.baseAmount, from.currency, from.additionalAmounts);
         obj.currencyExchangeRate = from.currencyExchangeRate;

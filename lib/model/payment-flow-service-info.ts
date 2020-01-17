@@ -15,6 +15,9 @@ import { JsonObject, JsonProperty } from "json2typescript";
 
 import { AdditionalData } from "./additional-data";
 
+/**
+ * Represents the capabilities of a flow service.
+ */
 @JsonObject
 export class PaymentFlowServiceInfo {
     

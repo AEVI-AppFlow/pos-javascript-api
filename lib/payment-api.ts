@@ -11,8 +11,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { Observable } from 'rxjs';
-
 import { PaymentClient } from './payment-client';
 
 export interface PaymentApi {
@@ -22,25 +20,25 @@ export interface PaymentApi {
      *
      * The API versioning follows semver rules with major.minor.patch versions.
      *
-     * @return The API version
+     * @return A Promise that will resolve to the current API version
      */
-    getApiVersion(): Observable<string>;
+    getApiVersion(): Promise<string>;
 
     /**
      * Returns true if the processing service that handles API requests is installed.
      *
      * If not installed, none of the API calls will function.
      *
-     * @return True if API processing service is installed, false otherwise
+     * @return A Promise that will resolve to True if API processing service is installed, false otherwise
      */
-    isProcessingServiceInstalled(): Observable<boolean>;
+    isProcessingServiceInstalled(): Promise<boolean>;
 
     /**
      * Get the processing service version installed on this device.
      *
-     * @return The processing service version (semver format)
+     * @return A promise that will resolve to the processing service version (semver format)
      */
-    getProcessingServiceVersion(): Observable<string>;
+    getProcessingServiceVersion(): Promise<string>;
 
     /**
      * Get a new instance of a {@link PaymentClient} to initiate payments.

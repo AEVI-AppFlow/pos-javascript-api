@@ -16,6 +16,9 @@ import { JsonObject, JsonProperty } from "json2typescript";
 import { AdditionalData } from './additional-data';
 import { Jsonable } from "./jsonable";
 
+/**
+ * Represents an event in the flow.
+ */
 @JsonObject
 export class FlowEvent extends Jsonable {
 

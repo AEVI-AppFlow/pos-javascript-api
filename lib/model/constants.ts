@@ -12,6 +12,29 @@
  *  limitations under the License.
  */
 
+export enum AppMessageTypes {
+
+    // Initiated by client apps
+    REQUEST_MESSAGE = "request",
+    PAYMENT_MESSAGE = "payment",
+    PAYMENT_FLOW_CONFIG_REQUEST = "paymentFlowConfigRequest",
+    RESPONSES_REQUEST = "responsesRequest",
+    DEVICE_INFO_REQUEST = "deviceInfoRequest",
+
+    // Sent from flow services
+    RESPONSE_MESSAGE = "response",
+    AUDIT_ENTRY = "auditEntry",
+    FAILURE_MESSAGE = "failure",
+    REQUEST_ACK_MESSAGE = "requestAck",
+
+    // Sent by FPS
+    FLOW_SERVICE_EVENT = "flowServiceEvent"
+}
+export enum ResponseMechanisms {
+    MESSENGER_CONNECTION = "messengerConnection",
+    RESPONSE_SERVICE = "responseService"
+}
+
 /**
  * Account type definitions representing possible account type choices for a payment card transaction.
  */
@@ -354,4 +377,105 @@ export enum StatusUpdateKeys {
     // Customer keys
     STATUS_UPDATE_CUSTOMER = "customerUpdate"
 
+}
+
+/**
+ * Defined set of error constants that may be passed back to the client.
+ */
+export enum ErrorConstants {
+
+    /**
+     * A general purpose error that will be sent for fatal failures in a flow service
+     */
+    FLOW_SERVICE_ERROR = "flowServiceError",
+
+    /**
+     * Sent if the processing service if not installed
+     */
+    PROCESSING_SERVICE_NOT_INSTALLED = "notInstalled",
+
+    /**
+     * Sent if the processing service rejects a request because it is busy processing another
+     */
+    PROCESSING_SERVICE_BUSY = "busy",
+
+    /**
+     * Sent if the processing service fails to cancel a flow
+     */
+    PROCESSING_SERVICE_CANCEL_FAILED = "cancelFailed",
+
+    /**
+     * Sent if the processing service fails to resume a flow
+     */
+    PROCESSING_SERVICE_RESUME_FAILED = "resumeFailed",
+
+    /**
+     * Sent if an unknown/unsupported request type is sent to the processing service
+     */
+    UNSUPPORTED_OPERATION = "unsupportedOperation",
+
+    /**
+     * Sent if the processing service has received an unexpected message type
+     */
+    INVALID_MESSAGE_TYPE = "invalidMessageType",
+
+    /**
+     * Sent if the flow type or name in the request is not valid
+     */
+    INVALID_FLOW_IDENTIFIER = "invalidFlowIdentifier",
+
+    /**
+     * The processing service has received an invalid or unreadable message. This usually indicates a message has been corrupted.
+     */
+    INVALID_REQUEST = "invalidRequest",
+
+    /**
+     * Sent if the client application is missing a response listener service implementation
+     */
+    MISSING_RESPONSE_LISTENER = "missingResponseListener",
+
+    /**
+     * Sent if a flow service does not support the stage it has just been called for
+     */
+    STAGE_NOT_SUPPORTED = "stageNotSupported",
+
+    /**
+     * Sent if the processing service cannot find a handler(s) for a stage
+     */
+    CONFIG_ERROR = "configError",
+
+    /**
+     * Sent if the processing service detects there is more than one config provider installed that provides flow configs
+     */
+    MULTIPLE_CONFIG_PROVIDERS = "multipleConfigProviders",
+
+    /**
+     * Sent if the processing service detects there is no config provider installed that provides flow configs
+     */
+    NO_CONFIG_PROVIDER = "noConfigProvider",
+
+    /**
+     * Sent if there are no flow services installed on the device that can handle any requests
+     */
+    NO_FLOW_SERVICES = "noFlowServices",
+
+    /**
+     * Sent if there are no flows configured and/or accepted by FPS
+     */
+    NO_AVAILABLE_FLOWS = "noAvailableFlows",
+
+    /**
+     * Sent if the client is using an API that is not the same major version as the one implemented by the processing service
+     */
+    INCOMPATIBLE_API_VERSION = "incompatibleApiVersion",
+
+    /**
+     * Sent if the client sends a request with the same id as a previously initiated request
+     */
+    DUPLICATE_REQUEST_ID = "duplicateRequestId",
+
+    /**
+     * Something unexpected happened
+     */
+    UNEXPECTED_ERROR = "unexpectedError"
 }

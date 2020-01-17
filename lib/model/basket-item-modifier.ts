@@ -14,6 +14,11 @@
 import { JsonObject, JsonProperty } from "json2typescript";
 import { PreConditions } from '../util/pre-conditions';
 
+/**
+ * A {@link BasketItemModifier} can be used to associate additional cost/amounts with a basket item, such as tax, discounts or add-ons.
+ *
+ * Either an absolute amount or a percentage must be set.
+ */
 @JsonObject
 export class BasketItemModifier {    
 
@@ -45,6 +50,8 @@ export class BasketItemModifier {
      * @param type       The type of the modifier.
      * @param amount     The absolute amount of the modifier.
      * @param percentage The percentage applied to the item amounts.
+     * 
+     * @returns The new BaskeTItemModifier instance
      */
     public static from(name: string, type: string, amount?: number, percentage?: number, id?: string): BasketItemModifier {
         PreConditions.checkArgument(amount != null || percentage != null, "Either amount or percentage must be set");

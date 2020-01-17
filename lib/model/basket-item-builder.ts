@@ -19,6 +19,9 @@ import { InvalidArgumentError } from '../util/pre-conditions';
 
 import { v4 as uuid } from 'uuid';
 
+/**
+ * Builder to create {@link BasketItem} instances.
+ */
 export class BasketItemBuilder {
 
     private id: string;
