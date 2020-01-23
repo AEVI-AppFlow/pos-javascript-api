@@ -30,7 +30,7 @@ export interface PaymentClient {
      *
      * This includes system settings, flow configurations, information about flow services, etc.
      *
-     * Subscribe to system events via {@link #subscribeToSystemEvents()} for updates when the state changes.
+     * Subscribe to system events via [[subscribeToSystemEvents]] for updates when the state changes.
      *
      * @return Observable emitting the latest known {@link PaymentSettings} instance
      */
@@ -41,12 +41,12 @@ export interface PaymentClient {
      *
      * Due to the nature of Android component lifecycles, AppFlow can not guarantee that your activity/service is still alive when a flow is complete,
      * meaning it may not be able to receive the response via this rx chain. To ensure that your application receives a response in a reliable way,
-     * your application must instead subscribe to the {@link Response} asynchronously using {@link #subscribeToResponses}.
+     * your application must instead subscribe to the {@link Response} asynchronously using [[subscribeToResponses]].
      *
      * This method returns a Promise that will resolve successfully if the request is accepted, or send an error if the request is invalid.
      *
      * If your request is rejected or an error occurs during the flow, a {@link FlowException} will be delivered to the observable that
-     * can be subscribed to from {@link #subscribeToResponseErrors} method. 
+     * can be subscribed to from [[subscribeToResponseErrors]] method. 
      * 
      * This {@link FlowException} contains an error code that can be mapped to one of the constants in {@link ErrorConstants} and an error message
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
@@ -61,12 +61,12 @@ export interface PaymentClient {
      *
      * Due to the nature of Android component lifecycles, AppFlow can not guarantee that your activity/service is still alive when a flow is complete,
      * meaning it may not be able to receive the response via this rx chain. To ensure that your application receives a response in a reliable way,
-     * your application must instead subscribe to the {@link PaymentResponse} asynchronously using {@link #subscribeToPaymentResponses}.
+     * your application must instead subscribe to the {@link PaymentResponse} asynchronously using [[subscribeToPaymentResponses]].
      *
      * This method returns a Promise that will resolve successfully if the request is accepted, or send an error if the request is invalid.
      *
      * If your request is rejected or an error occurs during the flow, a {@link FlowException} will be delivered to the observable that
-     * can be subscribed to from {@link #subscribeToPaymentResponseErrors} method. 
+     * can be subscribed to from [[subscribeToPaymentResponseErrors]] method. 
      * 
      * This {@link FlowException} contains an error code that can be mapped to one of the constants in {@link ErrorConstants} and an error message
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
@@ -109,7 +109,7 @@ export interface PaymentClient {
      *
      * This should be queried each time a selection is required to ensure an up-to-date list.
      *
-     * You can subscribe to {@link #subscribeToSystemEvents()} for updates on changes to the available devices.
+     * You can subscribe to [[subscribeToSystemEvents]] for updates on changes to the available devices.
      *
      * @return Observable stream emitting a list of {@link Device} objects containing basic device info
      */

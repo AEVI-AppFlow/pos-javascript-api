@@ -62,6 +62,8 @@ export enum AdditionalDataKeys {
     DATA_KEY_TRANSACTION_LANGUAGE = "transactionLanguage",
     DATA_KEY_ACCESSIBLE_MODE = "accessibleMode",
     DATA_KEY_TAX_INFO = "taxInfo",
+    DATA_KEY_CARD = "card",
+    DATA_KEY_CURRENCY= "currency",
 
     /**
      * This key should be added to the additional data of a request if post auth tip adjustment is allowed
@@ -119,6 +121,7 @@ export enum CardDataKeys {
     CARD_DATA_SERVICE_CODE = "serviceCode",
     CARD_DATA_CVV = "cvv",
     CARD_DATA_LANGUAGES = "languages",
+    CARD_DATA_BALANCE = "balance"
 }
 
 /**

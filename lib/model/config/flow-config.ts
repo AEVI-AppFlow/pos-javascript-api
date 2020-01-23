@@ -134,9 +134,9 @@ export class FlowConfig {
     /**
      * Get the request class for this flow, which indicates what type of request to use with it.
      *
-     * If this flow is to be used by a {@link com.aevi.sdk.flow.model.Request}, then the return value will be {@link #REQUEST_CLASS_GENERIC}
+     * If this flow is to be used by a {@link com.aevi.sdk.flow.model.Request}, then the return value will be [[REQUEST_CLASS_GENERIC]]
      *
-     * If this flow is to be used for a payment initiation, then the return value will be {@link #REQUEST_CLASS_PAYMENT}
+     * If this flow is to be used for a payment initiation, then the return value will be [[REQUEST_CLASS_PAYMENT]]
      *
      * @return The request class for this flow
      */

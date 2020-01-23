@@ -73,7 +73,7 @@ export class PaymentBuilder{
     /**
      * Add a basket for this payment.
      *
-     * Note that {@link #withAmounts(Amounts)} must be called to reflect the value of the basket. This API and the flow processing service do not
+     * Note that [[withAmounts]] must be called to reflect the value of the basket. This API and the flow processing service do not
      * take the basket data into account for any processing.
      *
      * @param basket The basket

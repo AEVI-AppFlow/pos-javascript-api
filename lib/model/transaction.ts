@@ -31,7 +31,7 @@ import { FlowStages } from './constants';
  * A transaction can contain zero to many {@link TransactionResponse} instances, as a result of calling into flow services that pay off a portion
  * or all of the requested amounts.
  *
- * Use {@link #getRequestedAmounts()} to retrieve the total amount requested for this transaction, and {@link #getRemainingAmounts()} to retrieve
+ * Use [[requestedAmounts]] to retrieve the total amount requested for this transaction, and [[getRemainingAmounts]] to retrieve
  * the amounts remaining to pay for this transaction, if any.
  */
 @JsonObject

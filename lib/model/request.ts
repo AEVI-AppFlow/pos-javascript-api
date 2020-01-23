@@ -57,7 +57,7 @@ export class Request extends Jsonable {
      *
      * The request type will be used to assign the correct flow for this request.
      *
-     * Please see {@link #setFlowName(String)} to explicitly specify what flow to use.
+     * Please use [[flowName]] to explicitly specify what flow to use.
      *
      * See reference values in the documentation for possible values.
      *

@@ -47,7 +47,7 @@ export enum RoundingStrategy {
  * It is up to the client to manage this correctly.
  *
  * Note that as basket items are immutable, any update to items (such as merging or changing quantity) leads to new instances being created. For the
- * latest up to date item, always fetch via {@link #getItemById(String)}.
+ * latest up to date item, always fetch via [[getItemById]].
  */
 @JsonObject("Basket")
 export class Basket extends Jsonable {
@@ -98,7 +98,7 @@ export class Basket extends Jsonable {
      * Get the total basket value, inclusive of tax.
      *
      * This value is calculated as the sum of each item base amount with modifiers applied and then rounded as per the strategy set
-     * via {@link #setRoundingStrategy(RoundingStrategy)}.
+     * via [[setRoundingStrategy]].
      *
      * @return The total basket value
      */
@@ -311,7 +311,7 @@ export class Basket extends Jsonable {
     /**
      * Get the number of unique items in the basket, incl any zero-quantity items.
      *
-     * See {@link #getTotalNumberOfItems()} for retrieving the total number of items.
+     * See [[getTotalNumberOfItems]] for retrieving the total number of items.
      *
      * @return The number of unique items in the basket
      */
@@ -322,7 +322,7 @@ export class Basket extends Jsonable {
     /**
      * Get the total number of items, taking into account the quantity of each individual item. This excludes zero-quantity items.
      *
-     * See {@link #getNumberOfUniqueItems()} for retrieving the number of unique items.
+     * See [[getNumberOfUniqueItems]] for retrieving the number of unique items.
      *
      * @return The total number of items
      */
@@ -337,7 +337,7 @@ export class Basket extends Jsonable {
     /**
      * Add additional data to this basket.
      *
-     * See {@link AdditionalData#addData(String, Object[])} for more info.
+     * See [[addData]] for more info.
      *
      * @param key    The key to use for this data
      * @param values An array of values for this data
