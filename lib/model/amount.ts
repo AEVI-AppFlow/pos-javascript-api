@@ -20,8 +20,8 @@ import { Jsonable } from "./jsonable";
 @JsonObject("Amount")
 export class Amount extends Jsonable {
 
-    @JsonProperty("amount")
-    public amount: number = 0;
+    @JsonProperty("value")
+    public value: number = 0;
 
     @JsonProperty("currency")
     public currency: string = "XXX";
@@ -47,9 +47,9 @@ export class Amount extends Jsonable {
      * 
      * @returns The initialised amount object
      */
-    public static from(amount: number, currency: string): Amount {
+    public static from(value: number, currency: string): Amount {
         var a = new Amount();
-        a.amount = amount;
+        a.value = value;
         a.currency = currency;
         return a;
     }
