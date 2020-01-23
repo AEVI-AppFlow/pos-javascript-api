@@ -29,13 +29,13 @@ export class Card {
 
     private static MAX_PAN_DIGITS_ALLOWED = 10;
 
-    @JsonProperty("maskedPan")
+    @JsonProperty("maskedPan", String, true)
     maskedPan: string = undefined;
 
-    @JsonProperty("cardholderName")
+    @JsonProperty("cardholderName", String, true)
     cardholderName: string = undefined;
 
-    @JsonProperty("expiryDate")
+    @JsonProperty("expiryDate", String, true)
     expiryDate: string = undefined;
 
     @JsonProperty("cardToken", Token, true)
