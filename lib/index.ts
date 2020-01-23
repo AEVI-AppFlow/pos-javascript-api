@@ -44,6 +44,7 @@ export { PaymentApi } from './payment-api';
 export { PaymentClient } from './payment-client';
 
 export { AdditionalData } from './model/additional-data';
+export { Amount } from './model/amount';
 export { Amounts } from './model/amounts';
 export { Basket } from './model/basket';
 export { BasketItem } from './model/basket-item';
