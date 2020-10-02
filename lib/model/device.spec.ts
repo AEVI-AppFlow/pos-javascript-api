@@ -30,6 +30,8 @@ describe('Device', () => {
     var device = new Device();
     device.name = "Best Device Eva";
     device.referenceId = "63773662";
+    device.serialNumber = "Kelloggs";
+    device.model = "One";
 
     var json = device.toJson();
 
