@@ -40,7 +40,7 @@ export class Transaction {
     @JsonProperty("requestedAmounts", Amounts)
     requestedAmounts: Amounts = undefined;
 
-    @JsonProperty("baskets", [Basket])
+    @JsonProperty("baskets", [Basket], true)
     baskets: Array<Basket> = undefined;
 
     @JsonProperty("customer", Customer, true)

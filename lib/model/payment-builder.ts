@@ -187,6 +187,16 @@ export class PaymentBuilder{
     }
 
     /**
+     * 
+     * @param source Set the source of this message. Usually this is the Id of POS application that is initiating this request
+     * @returns This builder
+     */
+    public withSource(source: string): PaymentBuilder {
+        this.source = source;
+        return this;
+    }
+
+    /**
      * Build an instance of {@link Payment} using the provided parameters.
      *
      * @return An instance of {@link Payment}
@@ -242,6 +252,7 @@ export class PaymentBuilder{
         if(p.basket) {
             p.basket.primaryBasket = true;
         }
+
         return p;
     }
 }

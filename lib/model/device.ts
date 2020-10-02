@@ -19,21 +19,28 @@ import { Jsonable } from "./jsonable";
 export enum DeviceDataKeys {
     MANUFACTURER = "maufacturer",
     MODEL = "model",
-    SERIAL = "serial"
+    SERIAL = "serial",
 }
 
 /**
  * Represents a device.
  */
+@JsonObject
 export class Device extends Jsonable {
     
-    @JsonProperty("uid")
-    uid: string = undefined;
+    @JsonProperty("referenceId")
+    referenceId: string = undefined;
 
-    @JsonProperty("name")
+    @JsonProperty("serialNumber")
+    serialNumber: string = undefined;
+
+    @JsonProperty("model")
+    model: string = undefined;
+
+    @JsonProperty("name", String, true)
     name: string = undefined;
 
-    @JsonProperty("details", AdditionalData)
+    @JsonProperty("details", AdditionalData, true)
     details: AdditionalData = new AdditionalData();
 
     constructor() {
@@ -43,15 +50,15 @@ export class Device extends Jsonable {
     /**
      * Creates and returns a new Device object based on the details given
      * 
-     * @param uid The unique Id of the device
+     * @param referenceId The unique Id of the device
      * @param name The friendly name of the device
      * @param details Any other details to be associated with this device e,g, make and model etc see {@link DeviceDataKeys}
      * 
      * @returns The new Customer object
      */
-    public static from(uid: string, name: string, details?: AdditionalData): Device {
+    public static from(referenceId: string, name: string, details?: AdditionalData): Device {
         var device = new Device();
-        device.uid = uid;
+        device.referenceId = referenceId;
         device.name = name;
         if(details) {
             device.details = details;

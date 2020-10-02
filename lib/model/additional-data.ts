@@ -36,7 +36,7 @@ class AdditionalDataConverter implements JsonCustomConvert<{ [name: string]: Jso
 export class AdditionalData extends Jsonable {
 
     @JsonProperty("data", AdditionalDataConverter)
-    private data: { [name: string]: JsonOption } = {};
+    data: { [name: string]: JsonOption } = {};
 
     constructor() {
         super();

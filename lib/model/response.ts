@@ -20,6 +20,8 @@ import { AdditionalData } from './additional-data';
 
 /**
  * Response to a generic {@link Request} that contains the outcome and bespoke response data for that request type.
+ * 
+ * @tsoaModel
  */
 @JsonObject
 export class Response extends Jsonable {
