@@ -11,6 +11,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 export { 
     AppMessageTypes,
     ResponseMechanisms,
@@ -39,9 +40,10 @@ export {
 } from './model/constants';
 
 export { AppMessage, InternalData } from './model/app-message';
+export { CloudFlowMessage, CloudFlowMessageTypes } from './model/cloud-flow-message';
 
 export { PaymentApi } from './payment-api';
-export { PaymentClient } from './payment-client';
+export { PaymentClient, PaymentClientOptions } from './payment-client';
 
 export { AdditionalData } from './model/additional-data';
 export { Amount } from './model/amount';
@@ -67,7 +69,7 @@ export { Response } from './model/response';
 export { ResponseQueryBuilder } from './model/response-query-builder';
 export { ResponseQuery } from './model/response-query';
 
-export { Device } from './model/device';
+export { Device, DeviceDataKeys } from './model/device';
 
 export { Merchant } from './model/merchant';
 
@@ -82,3 +84,6 @@ export { FlowApp } from './model/config/flow-app';
 export { FpsSettings } from './model/config/fps-settings';
 export { PaymentFlowServices } from './model/payment-flow-services';
 export { PaymentFlowServiceInfo } from './model/payment-flow-service-info';
+
+export { Jsonable } from './model/jsonable';
+

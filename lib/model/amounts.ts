@@ -35,10 +35,10 @@ export class Amounts extends Jsonable {
     currency: string = "XXX";
 
     @JsonProperty("currencyExchangeRate", Number, true)
-    currencyExchangeRate: number | undefined = 0;
+    currencyExchangeRate: number = 0;
 
     @JsonProperty("originalCurrency", String, true)
-    originalCurrency: string | undefined = undefined;
+    originalCurrency: string = undefined;
 
     constructor() {
         super();

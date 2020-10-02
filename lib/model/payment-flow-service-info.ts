@@ -57,8 +57,8 @@ export class PaymentFlowServiceInfo {
     @JsonProperty("stages", [String])
     stages: Array<string> = [];
 
-    @JsonProperty("flowAndStagesDefinitions")
-    flowAndStagesDefinitions: Map<string, string[]>;
+    //@JsonProperty("flowAndStagesDefinitions")
+    //flowAndStagesDefinitions: Map<string, string[]>;
 
     @JsonProperty("canAdjustAmounts")
     canAdjustAmounts: boolean = false;

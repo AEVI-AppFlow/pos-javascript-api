@@ -23,6 +23,10 @@ import { Device } from './model/device';
 import { PaymentSettings } from './model/config/payment-settings';
 import { FlowException } from './model/flow-exception';
 
+export interface PaymentClientOptions {
+    [name: string]: string
+}
+
 export interface PaymentClient {
 
     /**
@@ -32,9 +36,10 @@ export interface PaymentClient {
      *
      * Subscribe to system events via [[subscribeToSystemEvents]] for updates when the state changes.
      *
+     * @param options An object providing specific parameters to the underlying implementation e.g. connection and authorisation details for cloud-flow implmentation
      * @return Observable emitting the latest known {@link PaymentSettings} instance
      */
-    getPaymentSettings(): Observable<PaymentSettings>;
+    getPaymentSettings(options?: PaymentClientOptions): Observable<PaymentSettings>;
 
     /**
      * Initiate processing of the provided {@link Request}.
@@ -52,9 +57,10 @@ export interface PaymentClient {
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
      *
      * @param request The request
+     * @param options An object providing specific parameters to the underlying implementation
      * @return Promise that represents the acceptance of the request
      */
-    initiateRequest(request: Request): Promise<void>;
+    initiateRequest(request: Request, options?: PaymentClientOptions): Promise<void>;
 
     /**
      * Initiate payment processing based on the provided {@link Payment}.
@@ -72,9 +78,17 @@ export interface PaymentClient {
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
      *
      * @param payment The payment to process
+     * @param options An object providing specific parameters to the underlying implementation
      * @return Promise that represents the acceptance of the request
      */
-    initiatePayment(payment: Payment): Promise<void>;
+    initiatePayment(payment: Payment, options?: PaymentClientOptions): Promise<void>;
+
+    /**
+     * Send a flow event to the processing service. This event will picked up by services/flow apps registered for listening to events
+     * 
+     * @param flowEvent The event to send
+     */
+    sendEvent(flowEvent: FlowEvent, options?: PaymentClientOptions): Promise<void>;
 
     /**
      * Returns a stream of completed PaymentResponses for the given parameters.
@@ -84,9 +98,10 @@ export interface PaymentClient {
      * Responses will <strong>only</strong> be returned for completed flows. Responses for incomplete or in-progress flows will not be returned by this method
      *
      * @param responseQuery An object representing some parameters to limit the query by
+     * @param options An object providing specific parameters to the underlying implementation
      * @return An Observable stream of payment responses
      */
-    queryPaymentResponses(responseQuery: ResponseQuery):  Observable<PaymentResponse>;
+    queryPaymentResponses(responseQuery: ResponseQuery, options?: PaymentClientOptions):  Observable<PaymentResponse>;
 
     /**
      * Returns a stream of completed Responses for the given parameters
@@ -96,40 +111,54 @@ export interface PaymentClient {
      * Responses will <strong>only</strong> be returned for completed flows. Responses for incomplete or in-progress flows will not be returned by this method
      *
      * @param responseQuery An object representing some parameters to limit the query by
+     * @param options An object providing specific parameters to the underlying implementation
      * @return An Observable stream of responses
      */
-    queryResponses(responseQuery: ResponseQuery): Observable<Response>;
+    queryResponses(responseQuery: ResponseQuery, options?: PaymentClientOptions): Observable<Response>;
 
     /**
      * Query for devices connected to the processing service, if multi-device is enabled.
      *
      * It is up to the flow processing service configuration if multi-device is enabled or not. See {@link PaymentSettings} for more details.
      *
-     * Returns a single that emits a list of currently connected devices.
+     * Returns a promise of a list of currently connected devices.
      *
      * This should be queried each time a selection is required to ensure an up-to-date list.
      *
      * You can subscribe to [[subscribeToSystemEvents]] for updates on changes to the available devices.
      *
+     * @param options An object providing specific parameters to the underlying implementation
      * @return Observable stream emitting a list of {@link Device} objects containing basic device info
      */
-    getDevices(): Observable<Array<Device>>;
+    getDevices(options?: PaymentClientOptions): Promise<Array<Device>>;
 
     /**
      * Subscribe to general system events.
      *
      * Examples are when there are changed to devices, applications or system settings.
      *
+     * @param options An object providing specific parameters to the underlying implementation
      * @return A stream that will emit {@link FlowEvent} items
      */
-    subscribeToSystemEvents(): Observable<FlowEvent>;
+    subscribeToSystemEvents(options?: PaymentClientOptions): Observable<FlowEvent>;
+
+    /**
+     * Subscribe to flow events.
+     *
+     * Examples are when there are changed to devices, applications or system settings.
+     *
+     * @param options An object providing specific parameters to the underlying implementation
+     * @return A stream that will emit {@link FlowEvent} items
+     */
+    subscribeToFlowEvents(options?: PaymentClientOptions): Observable<FlowEvent>;
 
     /**
      * Subscribe to payment response that are sent asynchronously to this client
      * 
+     * @param options An object providing specific parameters to the underlying implementation
      * @retun A stream of {@link PaymentResponse} that are sent for every {@link Payment} requested
      */
-    subscribeToPaymentResponses(): Observable<PaymentResponse>;
+    subscribeToPaymentResponses(options?: PaymentClientOptions): Observable<PaymentResponse>;
 
     /**
      * Subscribe to ALL payment response errors sent back to this application
@@ -139,16 +168,18 @@ export interface PaymentClient {
      * 
      * This message is not intended for the end user (merchant). Instead the `errorCode` value should be used to lookup a suitable message for your user.
      *  
+     * @param options An object providing specific parameters to the underlying implementation
      * @return A stream that will emit response errors that are sent from the processing service.
      */
-    subscribeToPaymentResponseErrors(): Observable<FlowException>
+    subscribeToPaymentResponseErrors(options?: PaymentClientOptions): Observable<FlowException>
 
     /**
      * Subscribe to generic responses that are sent asynchronously to this client
      * 
+     * @param options An object providing specific parameters to the underlying implementation
      * @retun A stream of {@link Response} that are sent for every {@link Request} requested
      */
-    subscribeToResponses(): Observable<Response>
+    subscribeToResponses(options?: PaymentClientOptions): Observable<Response>
 
     /**
      * Subscribe to ALL generic response errors sent back to this application
@@ -158,7 +189,8 @@ export interface PaymentClient {
      * 
      * This message is not intended for the end user (merchant). Instead the `errorCode` value should be used to lookup a suitable message for your user.
      * 
+     * @param options An object providing specific parameters to the underlying implementation
      * @return A stream that will emit response errors that are sent from the processing service. 
      */
-    subscribeToResponseErrors(): Observable<FlowException>
+    subscribeToResponseErrors(options?: PaymentClientOptions): Observable<FlowException>
 }

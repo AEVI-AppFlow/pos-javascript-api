@@ -23,6 +23,8 @@ import { v4 as uuid } from 'uuid';
  *
  * If a flow name is set, the flow with that name will be explicitly used. If not set, the request type will be used to look up eligible flows
  * and one will be selected either automatically or via user interaction.
+ *
+ * @tsoaModel
  */
 @JsonObject
 export class Request extends Jsonable {
@@ -40,6 +42,9 @@ export class Request extends Jsonable {
 
     @JsonProperty("deviceId", String, true)
     deviceId: string = undefined;
+
+    @JsonProperty("source", String, true)
+    source: string = undefined;
 
     @JsonProperty("targetAppId", String, true)
     targetAppId: string = undefined;

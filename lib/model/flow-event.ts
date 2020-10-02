@@ -25,11 +25,20 @@ export class FlowEvent extends Jsonable {
     @JsonProperty("type")
     type: string = undefined;
 
-    @JsonProperty("data", AdditionalData)
+    @JsonProperty("data", AdditionalData, true)
     data: AdditionalData = new AdditionalData();
 
-    @JsonProperty("eventTrigger")
+    @JsonProperty("eventTrigger", String, true)
     eventTrigger: string = undefined;
+
+    @JsonProperty("originatingRequestId", String, true)
+    originatingRequestId: string;
+
+    @JsonProperty("source", String, true)
+    source: string;
+
+    @JsonProperty("deviceId", String, true)
+    deviceId: string;
 
     constructor() {
         super();
