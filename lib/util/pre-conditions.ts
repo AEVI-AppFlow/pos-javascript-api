@@ -12,50 +12,50 @@
  *  limitations under the License.
  */
 export class PreConditions {
-    private PreConditions() {
-    }
+  private PreConditions() {
+  }
 
-    public static checkState(check: boolean, message: string) {
-        if (!check) {
-            throw new InvalidArgumentError(message);
-        }
+  public static checkState(check: boolean, message: string) {
+    if (!check) {
+      throw new InvalidArgumentError(message);
     }
+  }
 
-    public static checkArgument(check: boolean, message: string) {
-        if (!check) {
-            throw new InvalidArgumentError(message);
-        }
+  public static checkArgument(check: boolean, message: string) {
+    if (!check) {
+      throw new InvalidArgumentError(message);
     }
+  }
 
-    public static checkNotNull(object: any, message: string) {
-        if (object == null) {
-            throw new InvalidArgumentError(message);
-        }
+  public static checkNotNull(object: any, message: string) {
+    if (object == null) {
+      throw new InvalidArgumentError(message);
     }
+  }
 
-    public static checkStringNotEmpty(str: string, message: string) {
-        if (str == null || str == "") {
-            throw new InvalidArgumentError(message);
-        }
+  public static checkStringNotEmpty(str: string, message: string) {
+    if (str == null || str === '') {
+      throw new InvalidArgumentError(message);
     }
+  }
 
-    public static checkNotEmpty(array: any[], message: string) {
-        if (array == null || array.length == 0) {
-            throw new InvalidArgumentError(message);
-        }
+  public static checkNotEmpty(array: any[], message: string) {
+    if (array == null || array.length === 0) {
+      throw new InvalidArgumentError(message);
     }
+  }
 
-    public static checkNotNegative(number: number, message: string) {
-        if (number < 0) {
-            throw new InvalidArgumentError(message);
-        }
+  public static checkNotNegative(number: number, message: string) {
+    if (number < 0) {
+      throw new InvalidArgumentError(message);
     }
+  }
 }
 
 export class InvalidArgumentError extends Error {
-    constructor(message?: string) {
-        super(message);
-        Object.setPrototypeOf(this, new.target.prototype);
-        this.name = InvalidArgumentError.name;
-    }
+  constructor(message?: string) {
+    super(message);
+    Object.setPrototypeOf(this, new.target.prototype);
+    this.name = InvalidArgumentError.name;
+  }
 }

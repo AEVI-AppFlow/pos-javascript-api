@@ -12,35 +12,44 @@
  *  limitations under the License.
  */
 
-export { 
-    AppMessageTypes,
-    ResponseMechanisms,
-    AccountTypes,
-    AdditionalDataKeys,
-    AmountIdentifiers,
-    AugmentedDataKeys,
-    CardAuthorisationMethods,
-    CardDataKeys,
-    CardEntryMethods,
-    CardNetworks,
-    EventDataKeys,
-    EventTypes,
-    FlowStages, 
-    FlowTypes, 
-    LoyaltyDataKeys,
-    ModifierTypes, 
-    PaymentDataKeys,
-    PaymentMethods,
-    ReceiptKeys,
-    ReferenceKeys,
-    ServiceInfoDataKeys,
-    SplitDataKeys,
-    StatusUpdateKeys,
-    ErrorConstants
+export {
+  AppMessageTypes,
+  ResponseMechanisms,
+  AccountTypes,
+  AdditionalDataKeys,
+  AmountIdentifiers,
+  AugmentedDataKeys,
+  CardAuthorisationMethods,
+  CardDataKeys,
+  CardEntryMethods,
+  CardNetworks,
+  EventDataKeys,
+  EventTypes,
+  FlowStages,
+  FlowTypes,
+  LoyaltyDataKeys,
+  ModifierTypes,
+  PaymentDataKeys,
+  PaymentMethods,
+  ReceiptKeys,
+  ReferenceKeys,
+  ServiceInfoDataKeys,
+  SplitDataKeys,
+  StatusUpdateKeys,
+  ErrorConstants,
 } from './model/constants';
 
+export {
+  ConfirmationInputTypes,
+  ConfirmationOptionValues,
+  ConfirmationTypes,
+  FlowEventTypes,
+  NotifyActionTypes,
+} from './model/events/event-constants';
+
+export { ProgressMessage } from './model/events/progress-message';
+
 export { AppMessage, InternalData } from './model/app-message';
-export { CloudFlowMessage, CloudFlowMessageTypes } from './model/cloud-flow-message';
 
 export { PaymentApi } from './payment-api';
 export { PaymentClient, PaymentClientOptions } from './payment-client';
@@ -86,4 +95,3 @@ export { PaymentFlowServices } from './model/payment-flow-services';
 export { PaymentFlowServiceInfo } from './model/payment-flow-service-info';
 
 export { Jsonable } from './model/jsonable';
-

@@ -19,15 +19,14 @@ import { BasketItemModifierBuilder } from './basket-item-modifier-builder';
 import { basketData } from './test-data/response';
 
 describe('Basket', () => {
-
-  var sourceBasket: Basket;
-  var defaultItemOne: BasketItem;
-  var defaultItemTwo: BasketItem;
+  let sourceBasket: Basket;
+  let defaultItemOne: BasketItem;
+  let defaultItemTwo: BasketItem;
 
   beforeEach(() => {
-    sourceBasket = Basket.fromItems("test");
-    defaultItemOne = BasketItem.from("123", "LabelOne", "cat", 1000, 1000, 2);
-    defaultItemTwo = BasketItem.from("456", "LabelTwo", "cat", 400, 400, 1);
+    sourceBasket = Basket.fromItems('test');
+    defaultItemOne = BasketItem.from('123', 'LabelOne', 'cat', 1000, 1000, 2);
+    defaultItemTwo = BasketItem.from('456', 'LabelTwo', 'cat', 400, 400, 1);
   });
 
   it('should create an instance', () => {
@@ -43,7 +42,7 @@ describe('Basket', () => {
   });
 
   it('can merge items with the same id', () => {
-    var singleItemQuantity = defaultItemOne.quantity;
+    const singleItemQuantity = defaultItemOne.quantity;
     sourceBasket.addItems(defaultItemOne);
 
     expect(sourceBasket.getItemById(defaultItemOne.id)).toBeTruthy();
@@ -72,22 +71,22 @@ describe('Basket', () => {
 
   it('can have multiple items with the same label', () => {
     sourceBasket.addItems(defaultItemOne);
-    var anotherItem = BasketItem.from("876", defaultItemOne.label, "cat", 500, 500, 1);
+    const anotherItem = BasketItem.from('876', defaultItemOne.label, 'cat', 500, 500, 1);
     sourceBasket.addItems(anotherItem);
 
     expect(sourceBasket.getNumberOfUniqueItems()).toBe(2);
-    expect(sourceBasket.getItemById(defaultItemOne.id)).toStrictEqual(expect.objectContaining({ label: defaultItemOne.label}));
+    expect(sourceBasket.getItemById(defaultItemOne.id)).toStrictEqual(expect.objectContaining({ label: defaultItemOne.label }));
   });
 
   it('can serialise and deserialise', () => {
     sourceBasket.addItems(defaultItemOne, defaultItemTwo);
-    sourceBasket.addAdditionalData("Bloop", "blarp");
+    sourceBasket.addAdditionalData('Bloop', 'blarp');
 
-    var serialised = sourceBasket.toJson();
-    let endBasket: Basket = Basket.fromJson(serialised);
+    const serialised = sourceBasket.toJson();
+    const endBasket: Basket = Basket.fromJson(serialised);
     expect(endBasket).toStrictEqual(sourceBasket);
 
-    var json2 = endBasket.toJson();
+    const json2 = endBasket.toJson();
     expect(json2).toBe(serialised);
   });
 
@@ -103,21 +102,21 @@ describe('Basket', () => {
   it('can find basket item by id', () => {
     sourceBasket.addItems(defaultItemOne, defaultItemTwo);
 
-    var item = sourceBasket.getItemById(defaultItemOne.id);
+    const item = sourceBasket.getItemById(defaultItemOne.id);
     expect(item).toStrictEqual(defaultItemOne);
   });
 
   it('can find basket item by label', () => {
     sourceBasket.addItems(defaultItemOne, defaultItemTwo);
 
-    var item = sourceBasket.getItemByLabel(defaultItemOne.label);
+    const item = sourceBasket.getItemByLabel(defaultItemOne.label);
     expect(item).toStrictEqual(defaultItemOne);
   });
 
   it('can increment basket item quantity', () => {
     sourceBasket.addItems(defaultItemOne, defaultItemTwo);
 
-    var beforeQuantity = defaultItemOne.quantity;
+    const beforeQuantity = defaultItemOne.quantity;
     sourceBasket.incrementItemQuantity(defaultItemOne.id, 1);
 
     expect(sourceBasket.getItemById(defaultItemOne.id).quantity).toBe(beforeQuantity + 1);
@@ -126,7 +125,7 @@ describe('Basket', () => {
   it('can decrement basket item quantity', () => {
     sourceBasket.addItems(defaultItemOne, defaultItemTwo);
 
-    var beforeQuantity = defaultItemOne.quantity;
+    const beforeQuantity = defaultItemOne.quantity;
     sourceBasket.decrementItemQuantity(defaultItemOne.id, 1);
 
     expect(sourceBasket.getItemById(defaultItemOne.id).quantity).toBe(beforeQuantity - 1);
@@ -192,50 +191,51 @@ describe('Basket', () => {
   });
 
   it('can get items by category', () => {
-    sourceBasket.addItems(BasketItem.from("123", "Coke", "Drinks", 1000, 1000, 1),
-                          BasketItem.from("456", "Fanta", "Drinks", 1000, 1000, 1),
-                          BasketItem.from("789", "Pork", "Meat", 1000, 1000, 1));
+    sourceBasket.addItems(BasketItem.from('123', 'Coke', 'Drinks', 1000, 1000, 1),
+      BasketItem.from('456', 'Fanta', 'Drinks', 1000, 1000, 1),
+      BasketItem.from('789', 'Pork', 'Meat', 1000, 1000, 1));
 
-    var drinks = sourceBasket.getBasketItemsByCategory("Drinks");
+    const drinks = sourceBasket.getBasketItemsByCategory('Drinks');
     expect(drinks).toHaveLength(2);
-    expect(drinks).toEqual(expect.arrayContaining([sourceBasket.getItemById("123"), sourceBasket.getItemById("456")]));
-
+    expect(drinks).toEqual(expect.arrayContaining([sourceBasket.getItemById('123'), sourceBasket.getItemById('456')]));
   });
 
   it('total value handles negative correctly', () => {
-    sourceBasket.addItems(BasketItem.from("123", "Coke", "Drinks", 1000, 1000, 1),
-                              BasketItem.from("456", "Fanta", "Drinks", -500, -500, 1));
+    sourceBasket.addItems(BasketItem.from('123', 'Coke', 'Drinks', 1000, 1000, 1),
+      BasketItem.from('456', 'Fanta', 'Drinks', -500, -500, 1));
 
-    var total = sourceBasket.getTotalBasketValue();
+    const total = sourceBasket.getTotalBasketValue();
     expect(total).toBe(500);
   });
 
   it('total value handles negative only values correctly', () => {
-    sourceBasket.addItems(BasketItem.from("456", "Fanta", "Drinks", -500, -500, 1));
+    sourceBasket.addItems(BasketItem.from('456', 'Fanta', 'Drinks', -500, -500, 1));
 
-    var total = sourceBasket.getTotalBasketValue();
+    const total = sourceBasket.getTotalBasketValue();
     expect(total).toBe(-500);
   });
 
   it('total should calculate from amount field if no modifiers', () => {
-    sourceBasket.addItems(BasketItem.from("123", "Coke", "Drinks", 1000, 0, 1),
-                          BasketItem.from("456", "Fanta", "Drinks", 500, 0, 1));
+    sourceBasket.addItems(BasketItem.from('123', 'Coke', 'Drinks', 1000, 0, 1),
+      BasketItem.from('456', 'Fanta', 'Drinks', 500, 0, 1));
 
     expect(sourceBasket.getTotalBasketValue()).toBe(1500);
   });
 
   it('total should caluclate from base and modifiers and round correctly', () => {
-    var basketItem1 = new BasketItemBuilder()
-                .withLabel("vanilla")
-                .withQuantity(2)
-                .withBaseAmountAndModifiers(500, new BasketItemModifierBuilder("tax1", "tax").withAmount(202.05).build(),
-                                            new BasketItemModifierBuilder("tax2", "tax").withPercentage(24.56).build()).build();
+    const basketItem1 = new BasketItemBuilder()
+      .withLabel('vanilla')
+      .withQuantity(2)
+      .withBaseAmountAndModifiers(500, new BasketItemModifierBuilder('tax1', 'tax').withAmount(202.05).build(),
+        new BasketItemModifierBuilder('tax2', 'tax').withPercentage(24.56).build())
+      .build();
 
-    var basketItem2 = new BasketItemBuilder()
-            .withLabel("ice")
-            .withQuantity(1)
-            .withBaseAmountAndModifiers(150, new BasketItemModifierBuilder("tax4", "tax").withAmount(-5.5).build(),
-                                        new BasketItemModifierBuilder("tax5", "tax").withPercentage(-25.003).build()).build();
+    const basketItem2 = new BasketItemBuilder()
+      .withLabel('ice')
+      .withQuantity(1)
+      .withBaseAmountAndModifiers(150, new BasketItemModifierBuilder('tax4', 'tax').withAmount(-5.5).build(),
+        new BasketItemModifierBuilder('tax5', 'tax').withPercentage(-25.003).build())
+      .build();
 
     sourceBasket.addItems(basketItem1, basketItem2);
 
@@ -245,15 +245,15 @@ describe('Basket', () => {
     sourceBasket.roundingStrategy = RoundingStrategy.DOWN;
     expect(sourceBasket.getTotalBasketValue()).toBe(1756);
 
-    sourceBasket.roundingStrategy= RoundingStrategy.UP;
+    sourceBasket.roundingStrategy = RoundingStrategy.UP;
     expect(sourceBasket.getTotalBasketValue()).toBe(1757);
   });
 
   it('should read basket data from json', () => {
-    var basket = Basket.fromJson(basketData);    
+    const basket = Basket.fromJson(basketData);
 
     expect(basket).toBeTruthy();
-    expect(basket.basketName).toBe("sampleBasket");
+    expect(basket.basketName).toBe('sampleBasket');
     expect(basket.displayItems).toHaveLength(4);
     expect(basket.displayItems[0].amount).toBe(300);
     expect(basket.displayItems[1].amount).toBe(150);
@@ -262,6 +262,5 @@ describe('Basket', () => {
     expect(basket.displayItems[3].getTotalAmount()).toBe(458);
     expect(basket.displayItems[3].hasModifiers()).toBeFalsy();
     expect(basket.displayItems[3].measurement.value).toBe(1.5);
-
-  })
+  });
 });

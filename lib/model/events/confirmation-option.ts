@@ -11,33 +11,24 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { Jsonable } from '../jsonable';
 
-/**
- * Represents a measurement with a value and unit.
- *
- * Examples are "2.5 kilograms" or "13.45 feet".
- */
-@JsonObject
-export class Measurement {
+@JsonObject('ConfirmationOption')
+export class ConfirmationOption extends Jsonable {
   @JsonProperty('value')
-  value: number = undefined;
+  public value: string = undefined;
 
-  @JsonProperty('unit')
-  unit: string = undefined;
+  @JsonProperty('label')
+  public label: string = undefined;
 
   /**
-     * Create and return a measuremnet object from the values given
+     * Convert a JSON string into an {@link ConfirmationOption} object if possible
      *
-     * @param value The amount the measurement represents (can be a float if required)
-     * @param unit The unit of measurement e.g g, kg, m, cm, mm
-     *
-     * @returns The newly created measurement object
+     * @param json The JSON to convert
      */
-  public static from(value: number, unit: string): Measurement {
-    const m = new Measurement();
-    m.value = value;
-    m.unit = unit;
-    return m;
+  public static fromJson(json: string): ConfirmationOption {
+    return Jsonable.baseFromJson(json, ConfirmationOption);
   }
 }

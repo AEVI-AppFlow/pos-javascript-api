@@ -11,16 +11,21 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { Jsonable } from '../jsonable';
 
-@JsonObject
-export class FlowApp {
-  @JsonProperty('id')
-  id: string = undefined;
+@JsonObject('FinalAmountRequest')
+export class FinalAmountRequest extends Jsonable {
+  @JsonProperty('timeout')
+  public timeout: number = -1;
 
-  @JsonProperty('mandatory', Boolean, true)
-  mandatory: boolean = false;
-
-  @JsonProperty('conditionalOn', String, true)
-  conditionalOn: string = undefined;
+  /**
+     * Convert a JSON string into an {@link FinalAmountRequest} object if possible
+     *
+     * @param json The JSON to convert
+     */
+  public static fromJson(json: string): FinalAmountRequest {
+    return Jsonable.baseFromJson(json, FinalAmountRequest);
+  }
 }

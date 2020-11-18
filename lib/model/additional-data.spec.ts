@@ -23,142 +23,143 @@ describe('AdditionalData', () => {
   });
 
   it('should report empty correctly', () => {
-    var ad = new AdditionalData();
+    const ad = new AdditionalData();
     expect(ad.isEmpty()).toBeTruthy();
 
-    ad.addData("bleep", "blarp");
+    ad.addData('bleep', 'blarp');
     expect(ad.isEmpty()).toBeFalsy();
   });
 
   it('should get a boolean as a boolean', () => {
-    var ad = new AdditionalData();
-    ad.addData("banana", true);
-    
-    expect(ad.getValue("banana")).toBe(true);
+    const ad = new AdditionalData();
+    ad.addData('banana', true);
+
+    expect(ad.getValue('banana')).toBe(true);
   });
 
   it('should get a string back as a string', () => {
-    var ad = new AdditionalData();
-    ad.addData("banana", "I'm a banana");
+    const ad = new AdditionalData();
+    ad.addData('banana', "I'm a banana");
 
-    expect(ad.getValue("banana")).toBe("I'm a banana");
+    expect(ad.getValue('banana')).toBe("I'm a banana");
   });
 
   it('should get a number back as a number', () => {
-    var ad = new AdditionalData();
-    ad.addData("banana", 100344);
+    const ad = new AdditionalData();
+    ad.addData('banana', 100344);
 
-    expect(ad.getValue("banana")).toBe(100344);
+    expect(ad.getValue('banana')).toBe(100344);
   });
 
   it('should return has data correctly', () => {
-    var ad = new AdditionalData();
-    ad.addData("banana", 100344);
+    const ad = new AdditionalData();
+    ad.addData('banana', 100344);
 
-    expect(ad.hasData("banana")).toBe(true);
-    expect(ad.hasData("apple")).toBe(false);
+    expect(ad.hasData('banana')).toBe(true);
+    expect(ad.hasData('apple')).toBe(false);
   });
 
   it('should get an object back as an object', () => {
-    var ad = new AdditionalData();
-    var obj = {cheese: "bacon", onion: "lettuce"};
-    ad.addData("banana", obj);
+    const ad = new AdditionalData();
+    const obj = { cheese: 'bacon', onion: 'lettuce' };
+    ad.addData('banana', obj);
 
-    expect(ad.getValue("banana")).toStrictEqual(obj);
+    expect(ad.getValue('banana')).toStrictEqual(obj);
   });
 
   it('should get an array back as an array', () => {
-    var ad = new AdditionalData();
-    ad.addData("banana", ["I'm a banana", "No I'm a banana"]);
+    const ad = new AdditionalData();
+    ad.addData('banana', ["I'm a banana", "No I'm a banana"]);
 
-    expect(ad.getValue("banana")).toHaveLength(2);
-    expect(ad.getValue("banana")).toEqual(expect.arrayContaining(["I'm a banana", "No I'm a banana"]));
+    expect(ad.getValue('banana')).toHaveLength(2);
+    expect(ad.getValue('banana')).toEqual(expect.arrayContaining(["I'm a banana", "No I'm a banana"]));
   });
 
   it('should get a higher order object as correct type after serialization', () => {
-    var ad = new AdditionalData();
-    var basket = new Basket();
-    var customer = new Customer();
-    var obj = {stuff: "andthat"};
-    customer.fullName = "Barry White";
-    basket.addAdditionalData("bloop", "blarp");
-    basket.addAdditionalData("somestuff", obj);
-    basket.addAdditionalData("customer", customer);
-    ad.addData("basket", basket);
+    const ad = new AdditionalData();
+    const basket = new Basket();
+    const customer = new Customer();
+    const obj = { stuff: 'andthat' };
+    customer.fullName = 'Barry White';
+    basket.addAdditionalData('bloop', 'blarp');
+    basket.addAdditionalData('somestuff', obj);
+    basket.addAdditionalData('customer', customer);
+    ad.addData('basket', basket);
 
-    var deserialised = AdditionalData.fromJson(ad.toJson());
-    var basketResult: Basket = deserialised.getValue("basket", Basket);
+    const deserialised = AdditionalData.fromJson(ad.toJson());
+    const basketResult: Basket = deserialised.getValue('basket', Basket);
 
     expect(basketResult.constructor.name).toBe(Basket.name);
-    expect(basketResult.additionalBasketData.getValue("bloop")).toBe("blarp");
-    expect(basketResult.additionalBasketData.getValue("somestuff")).toStrictEqual(obj);
-    expect(basketResult.additionalBasketData.getValue("customer", Customer).constructor.name).toBe(Customer.name);
-    expect(basketResult.additionalBasketData.getValue("customer", Customer).fullName).toStrictEqual(customer.fullName);
+    expect(basketResult.additionalBasketData.getValue('bloop')).toBe('blarp');
+    expect(basketResult.additionalBasketData.getValue('somestuff')).toStrictEqual(obj);
+    expect(basketResult.additionalBasketData.getValue('customer', Customer).constructor.name).toBe(Customer.name);
+    expect(basketResult.additionalBasketData.getValue('customer', Customer).fullName).toStrictEqual(customer.fullName);
     expect(basketResult.toJson()).toBe(basket.toJson());
   });
 
   it('should clear all data', () => {
-    var ad = new AdditionalData();
-    ad.addData("banana", 1);
-    ad.addData("banana1", 2);
-    ad.addData("banana2", 3);
-    ad.addData("banana3", 4);
+    const ad = new AdditionalData();
+    ad.addData('banana', 1);
+    ad.addData('banana1', 2);
+    ad.addData('banana2', 3);
+    ad.addData('banana3', 4);
 
     ad.clearData();
 
-    expect(ad.getValue("banana")).toBeUndefined();
-    expect(ad.hasData("banana")).toBe(false);
+    expect(ad.getValue('banana')).toBeUndefined();
+    expect(ad.hasData('banana')).toBe(false);
   });
 
   it('should remove a key', () => {
-    var ad = new AdditionalData();
-    ad.addData("banana", 1);
-    ad.addData("banana1", 2);
-    
-    ad.removeData("banana");
+    const ad = new AdditionalData();
+    ad.addData('banana', 1);
+    ad.addData('banana1', 2);
 
-    expect(ad.getValue("banana")).toBeUndefined();
+    ad.removeData('banana');
+
+    expect(ad.getValue('banana')).toBeUndefined();
   });
 
   it('should return all keys', () => {
-    var ad = new AdditionalData();
-    ad.addData("key1", 0);
-    ad.addData("key2", 0);
-    ad.addData("key3", 0);
-    ad.addData("key4", 0);
+    const ad = new AdditionalData();
+    ad.addData('key1', 0);
+    ad.addData('key2', 0);
+    ad.addData('key3', 0);
+    ad.addData('key4', 0);
 
     expect(ad.getKeys()).toHaveLength(4);
-    expect(ad.getKeys()).toContain("key1");
-    expect(ad.getKeys()).toContain("key2");
-    expect(ad.getKeys()).toContain("key3");
-    expect(ad.getKeys()).toContain("key4");
+    expect(ad.getKeys()).toContain('key1');
+    expect(ad.getKeys()).toContain('key2');
+    expect(ad.getKeys()).toContain('key3');
+    expect(ad.getKeys()).toContain('key4');
   });
 
   it('can read from JSON correctly', () => {
-    var json = '{"data":{"key1":{"value":0,"type":"number"},"key2":{"value":0,"type":"number"},"key3":{"value":0,"type":"number"},"key4":{"value":0,"type":"number"}}}';
-    var ad = Object.assign(new AdditionalData(), JSON.parse(json));
-    
+    const json = '{"data":{"key1":{"value":0,"type":"number"},"key2":{"value":0,"type":"number"},"key3":{"value":0,"type":"number"},"key4":{"value":0,"type":"number"}}}';
+    const ad = Object.assign(new AdditionalData(), JSON.parse(json));
+
     expect(ad.getKeys()).toHaveLength(4);
-    expect(ad.getKeys()).toContain("key1");
-    expect(ad.getKeys()).toContain("key2");
-    expect(ad.getKeys()).toContain("key3");
-    expect(ad.getKeys()).toContain("key4");
+    expect(ad.getKeys()).toContain('key1');
+    expect(ad.getKeys()).toContain('key2');
+    expect(ad.getKeys()).toContain('key3');
+    expect(ad.getKeys()).toContain('key4');
   });
 
   it('can serialise and deserialise from JSON', () => {
-    var ad = new AdditionalData();
-    ad.addData("key1", {"blah": "bloop", "bleep": 2, "bling": true, "blang": 5.63291991911});
-    var basketo = new Basket();
-    basketo.basketName = "Berts shopping";
+    const ad = new AdditionalData();
+    ad.addData('key1', {
+      blah: 'bloop', bleep: 2, bling: true, blang: 5.63291991911,
+    });
+    const basketo = new Basket();
+    basketo.basketName = 'Berts shopping';
     basketo.addItems(new BasketItem());
-    ad.addData("key2", basketo);
-    ad.addData("key3", 0);
-    ad.addData("key4", 0);
+    ad.addData('key2', basketo);
+    ad.addData('key3', 0);
+    ad.addData('key4', 0);
 
-    var json = ad.toJson();
-    var deserialised = AdditionalData.fromJson(json);
+    const json = ad.toJson();
+    const deserialised = AdditionalData.fromJson(json);
 
     expect(deserialised.toJson()).toStrictEqual(ad.toJson());
   });
-
 });

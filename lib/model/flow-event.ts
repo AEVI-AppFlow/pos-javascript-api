@@ -11,48 +11,43 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 
 import { AdditionalData } from './additional-data';
-import { Jsonable } from "./jsonable";
+import { Jsonable } from './jsonable';
 
 /**
  * Represents an event in the flow.
  */
 @JsonObject
 export class FlowEvent extends Jsonable {
+  @JsonProperty('type')
+  type: string = undefined;
 
-    @JsonProperty("type")
-    type: string = undefined;
+  @JsonProperty('data', AdditionalData, true)
+  data: AdditionalData = new AdditionalData();
 
-    @JsonProperty("data", AdditionalData, true)
-    data: AdditionalData = new AdditionalData();
+  @JsonProperty('eventTrigger', String, true)
+  eventTrigger: string = undefined;
 
-    @JsonProperty("eventTrigger", String, true)
-    eventTrigger: string = undefined;
+  @JsonProperty('originatingRequestId', String, true)
+  originatingRequestId: string;
 
-    @JsonProperty("originatingRequestId", String, true)
-    originatingRequestId: string;
+  @JsonProperty('source', String, true)
+  source: string;
 
-    @JsonProperty("source", String, true)
-    source: string;
+  @JsonProperty('deviceId', String, true)
+  deviceId: string;
 
-    @JsonProperty("deviceId", String, true)
-    deviceId: string;
+  public static from(type: string, eventTrigger: string, data: AdditionalData = new AdditionalData()): FlowEvent {
+    const flowEvent = new FlowEvent();
+    flowEvent.type = type;
+    flowEvent.eventTrigger = eventTrigger;
+    flowEvent.data = data;
+    return flowEvent;
+  }
 
-    constructor() {
-        super();
-    }
-
-    public static from(type: string, eventTrigger: string, data: AdditionalData = new AdditionalData()): FlowEvent {
-        var flowEvent = new FlowEvent();
-        flowEvent.type = type;
-        flowEvent.eventTrigger = eventTrigger;
-        flowEvent.data = data;
-        return flowEvent;
-    }
-
-    public static fromJson(json: string): FlowEvent {
-        return this.baseFromJson(json, FlowEvent);
-    }
+  public static fromJson(json: string): FlowEvent {
+    return this.baseFromJson(json, FlowEvent);
+  }
 }

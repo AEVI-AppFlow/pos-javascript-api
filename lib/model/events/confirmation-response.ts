@@ -11,16 +11,24 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+
 import { JsonObject, JsonProperty } from 'json2typescript';
+import { Jsonable } from '../jsonable';
 
-@JsonObject
-export class FlowApp {
-  @JsonProperty('id')
-  id: string = undefined;
+@JsonObject('ConfirmationResponse')
+export class ConfirmationResponse extends Jsonable {
+  @JsonProperty('confirmationRequestId')
+  public confirmationRequestId: string = undefined;
 
-  @JsonProperty('mandatory', Boolean, true)
-  mandatory: boolean = false;
+  @JsonProperty('selectedValues')
+  public selectedValues: string[] = undefined;
 
-  @JsonProperty('conditionalOn', String, true)
-  conditionalOn: string = undefined;
+  /**
+     * Convert a JSON string into an {@link ConfirmationResponse} object if possible
+     *
+     * @param json The JSON to convert
+     */
+  public static fromJson(json: string): ConfirmationResponse {
+    return Jsonable.baseFromJson(json, ConfirmationResponse);
+  }
 }

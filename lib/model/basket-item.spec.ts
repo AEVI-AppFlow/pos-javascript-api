@@ -17,33 +17,32 @@ import { BasketItemModifierBuilder } from './basket-item-modifier-builder';
 import { Measurement } from './measurement';
 
 describe('BasketItem', () => {
-
-  var defaultItem = BasketItem.from("123", "Pandoras Box", "Greek Myths", 1000, 500, 2, Measurement.from(2.5, "kg"), undefined);
-  var basketItem = new BasketItemBuilder()
-                        .withLabel("ice")
-                        .withQuantity(2)
-                        .withBaseAmountAndModifiers(500,
-                            new BasketItemModifierBuilder("tax1", "tax").withAmount(202.05).build(),
-                            new BasketItemModifierBuilder("tax2", "tax").withPercentage(24.56).build(),
-                            new BasketItemModifierBuilder("tax3", "tax").withAmount(200).build(),
-                            new BasketItemModifierBuilder("tax4", "tax").withAmount(-5.5).build(),
-                            new BasketItemModifierBuilder("tax5", "tax").withPercentage(-25.003).build()).build();
-
+  const defaultItem = BasketItem.from('123', 'Pandoras Box', 'Greek Myths', 1000, 500, 2, Measurement.from(2.5, 'kg'), undefined);
+  const basketItem = new BasketItemBuilder()
+    .withLabel('ice')
+    .withQuantity(2)
+    .withBaseAmountAndModifiers(500,
+      new BasketItemModifierBuilder('tax1', 'tax').withAmount(202.05).build(),
+      new BasketItemModifierBuilder('tax2', 'tax').withPercentage(24.56).build(),
+      new BasketItemModifierBuilder('tax3', 'tax').withAmount(200).build(),
+      new BasketItemModifierBuilder('tax4', 'tax').withAmount(-5.5).build(),
+      new BasketItemModifierBuilder('tax5', 'tax').withPercentage(-25.003).build())
+    .build();
 
   it('should create an instance', () => {
     expect(defaultItem).toBeTruthy();
-    expect(defaultItem.id).toBe("123");
-    expect(defaultItem.label).toBe("Pandoras Box");
-    expect(defaultItem.category).toBe("Greek Myths");
+    expect(defaultItem.id).toBe('123');
+    expect(defaultItem.label).toBe('Pandoras Box');
+    expect(defaultItem.category).toBe('Greek Myths');
     expect(defaultItem.amount).toBe(1000);
     expect(defaultItem.baseAmount).toBe(500);
     expect(defaultItem.quantity).toBe(2);
     expect(defaultItem.hasMeasurement()).toBe(true);
-    expect(defaultItem.measurement).toStrictEqual(Measurement.from(2.5, "kg"));
+    expect(defaultItem.measurement).toStrictEqual(Measurement.from(2.5, 'kg'));
   });
 
   it('should get correct fractional amount', () => {
-    var expected = 2 * (500 + 202.05 + (500 * 0.2456) + 200 + (-5.5) + (500 * -0.25003));
+    const expected = 2 * (500 + 202.05 + (500 * 0.2456) + 200 + (-5.5) + (500 * -0.25003));
     expect(basketItem.getTotalFractionalAmount()).toBe(expected);
   });
 
@@ -55,5 +54,5 @@ describe('BasketItem', () => {
   it('should report measurements correctly', () => {
     expect(basketItem.hasMeasurement()).toBeFalsy();
     expect(defaultItem.hasMeasurement()).toBeTruthy();
-  })
+  });
 });

@@ -11,67 +11,66 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 
-import { AdditionalData } from "./additional-data";
+import { AdditionalData } from './additional-data';
 
 /**
  * Represents the capabilities of a flow service.
  */
 @JsonObject
 export class PaymentFlowServiceInfo {
-    
-    @JsonProperty("id")
-    id: string = undefined;
+  @JsonProperty('id')
+  id: string = undefined;
 
-    @JsonProperty("packageName")
-    packageName: string = undefined;
+  @JsonProperty('packageName')
+  packageName: string = undefined;
 
-    @JsonProperty("vendor")
-    vendor: string = undefined;
+  @JsonProperty('vendor')
+  vendor: string = undefined;
 
-    @JsonProperty("serviceVersion")
-    serviceVersion: string = undefined;
+  @JsonProperty('serviceVersion')
+  serviceVersion: string = undefined;
 
-    @JsonProperty("apiVersion")
-    apiVersion: string = undefined;
+  @JsonProperty('apiVersion')
+  apiVersion: string = undefined;
 
-    @JsonProperty("displayName")
-    displayName: string = undefined;
+  @JsonProperty('displayName')
+  displayName: string = undefined;
 
-    @JsonProperty("hasAccessibilityMode")
-    hasAccessibilityMode: boolean = false;
+  @JsonProperty('hasAccessibilityMode')
+  hasAccessibilityMode: boolean = false;
 
-    @JsonProperty("supportedFlowTypes", [String])
-    supportedFlowTypes: Array<string> = [];
+  @JsonProperty('supportedFlowTypes', [String])
+  supportedFlowTypes: Array<string> = [];
 
-    @JsonProperty("customRequestTypes", [String])
-    customRequestTypes: Array<string> = [];
+  @JsonProperty('customRequestTypes', [String])
+  customRequestTypes: Array<string> = [];
 
-    @JsonProperty("supportedDataKeys", [String])
-    supportedDataKeys: Array<string> = [];
+  @JsonProperty('supportedDataKeys', [String])
+  supportedDataKeys: Array<string> = [];
 
-    @JsonProperty("additionalInfo", AdditionalData)
-    additionalInfo: AdditionalData = new AdditionalData();
+  @JsonProperty('additionalInfo', AdditionalData)
+  additionalInfo: AdditionalData = new AdditionalData();
 
-    @JsonProperty("stages", [String])
-    stages: Array<string> = [];
+  @JsonProperty('stages', [String])
+  stages: Array<string> = [];
 
-    //@JsonProperty("flowAndStagesDefinitions")
-    //flowAndStagesDefinitions: Map<string, string[]>;
+  // @JsonProperty("flowAndStagesDefinitions")
+  // flowAndStagesDefinitions: Map<string, string[]>;
 
-    @JsonProperty("canAdjustAmounts")
-    canAdjustAmounts: boolean = false;
-    
-    @JsonProperty("canPayAmounts")
-    canPayAmounts: boolean = false;
-    
-    @JsonProperty("defaultCurrency")
-    defaultCurrency: string = undefined;    
-    
-    @JsonProperty("supportedCurrencies", [String])
-    supportedCurrencies: Array<string> = [];
-    
-    @JsonProperty("paymentMethods", [String])
-    paymentMethods: Array<string> = [];
+  @JsonProperty('canAdjustAmounts')
+  canAdjustAmounts: boolean = false;
+
+  @JsonProperty('canPayAmounts')
+  canPayAmounts: boolean = false;
+
+  @JsonProperty('defaultCurrency')
+  defaultCurrency: string = undefined;
+
+  @JsonProperty('supportedCurrencies', [String])
+  supportedCurrencies: Array<string> = [];
+
+  @JsonProperty('paymentMethods', [String])
+  paymentMethods: Array<string> = [];
 }

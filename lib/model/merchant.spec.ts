@@ -19,7 +19,7 @@ describe('Merchant', () => {
   });
 
   it('should create from', () => {
-    var merch = Merchant.from("1245452", "Shops'R'Us");
+    const merch = Merchant.from('1245452', "Shops'R'Us");
     expect(merch.name).toBe("Shops'R'Us");
   });
 });

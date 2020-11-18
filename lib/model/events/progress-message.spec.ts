@@ -11,24 +11,20 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { Request } from './request';
-import { Amount } from './amount';
-import { AdditionalData } from './additional-data';
+import { ProgressMessage } from './progress-message';
 
-describe('Request', () => {
+describe('ProgressMessage', () => {
   it('should create an instance', () => {
-    expect(new Request()).toBeTruthy();
+    expect(new ProgressMessage()).toBeTruthy();
   });
 
-  it('should serialise and deserialise correctly', () => {
-    const amount = Amount.from(20, 'GBP');
-    const ad = new AdditionalData();
-    ad.addData('amount', amount);
-    const request = Request.from('blahah', ad);
-    const json = request.toJson();
+  it('should serialize and deserialize correctly', () => {
+    const message = new ProgressMessage();
+    message.messageText = 'bleeeeeep';
 
-    const requestResult = Request.fromJson(json);
+    const json = message.toJson();
+    const messageResult = ProgressMessage.fromJson(json);
 
-    expect(requestResult.requestData.getValue('amount', Amount)).toStrictEqual(amount);
+    expect(messageResult).toStrictEqual(message);
   });
 });

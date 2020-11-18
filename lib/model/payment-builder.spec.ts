@@ -11,7 +11,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { PaymentBuilder }  from './payment-builder';
+import { PaymentBuilder } from './payment-builder';
 import { Amounts } from './amounts';
 import { Token } from './token';
 import { InvalidArgumentError } from '../util/pre-conditions';
@@ -19,23 +19,30 @@ import { Basket } from './basket';
 import { BasketItemBuilder } from './basket-item-builder';
 
 describe('PaymentBuilder', () => {
-
   it('can build a valid request', () => {
-    var amounts = Amounts.from(2000, "GBP");
-    var payment = new PaymentBuilder().withPaymentFlow("sale").withAmounts(amounts).build();
+    const amounts = Amounts.from(2000, 'GBP');
+    const payment = new PaymentBuilder().withPaymentFlow('sale').withAmounts(amounts).build();
 
     expect(payment.amounts).toStrictEqual(amounts);
-    expect(payment.flowType).toBe("sale");
+    expect(payment.flowType).toBe('sale');
   });
 
   it('should not allow card token and split together', () => {
-    var amounts = Amounts.from(2000, "GBP");
-    expect(() => { new PaymentBuilder().withPaymentFlow("sale").withAmounts(amounts).withSplitEnabled(true).withCardToken(Token.from("1232", "card")).build() }).toThrow(InvalidArgumentError);
+    const amounts = Amounts.from(2000, 'GBP');
+    expect(() => {
+      new PaymentBuilder().withPaymentFlow('sale').withAmounts(amounts).withSplitEnabled(true)
+        .withCardToken(Token.from('1232', 'card'))
+        .build();
+    }).toThrow(InvalidArgumentError);
   });
 
   it('should not allow basket and amounts total mismatch', () => {
-    var amounts = Amounts.from(2000, "GBP");
-    var basket = Basket.fromItems("test", new BasketItemBuilder().generateRandomId().withLabel("bla").withAmount(900).build());
-    expect(() => { new PaymentBuilder().withPaymentFlow("sale").withAmounts(amounts).withBasket(basket).build() }).toThrow(InvalidArgumentError);
+    const amounts = Amounts.from(2000, 'GBP');
+    const basket = Basket.fromItems('test', new BasketItemBuilder().generateRandomId().withLabel('bla').withAmount(900)
+      .build());
+    expect(() => {
+      new PaymentBuilder().withPaymentFlow('sale').withAmounts(amounts).withBasket(basket)
+        .build();
+    }).toThrow(InvalidArgumentError);
   });
 });

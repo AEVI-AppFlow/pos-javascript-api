@@ -11,8 +11,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import {JsonObject, JsonProperty} from "json2typescript";
-import { Jsonable } from "./jsonable";
+import { JsonObject, JsonProperty } from 'json2typescript';
+import { Jsonable } from './jsonable';
 
 /**
  * An exception that will be returned to a client for fatal flow errors
@@ -23,25 +23,20 @@ import { Jsonable } from "./jsonable";
  */
 @JsonObject
 export class FlowException extends Jsonable {
+  @JsonProperty('errorCode', String)
+  errorCode: string = undefined;
 
-    @JsonProperty("errorCode", String)
-    errorCode: string = undefined;
+  @JsonProperty('errorMessage', String)
+  errorMessage: string = undefined;
 
-    @JsonProperty("errorMessage", String)
-    errorMessage: string = undefined;
+  public static from(errorCode: string, errorMessage: string): FlowException {
+    const fe = new FlowException();
+    fe.errorCode = errorCode;
+    fe.errorMessage = errorMessage;
+    return fe;
+  }
 
-    constructor() {
-        super();
-    }
-
-    public static from(errorCode: string, errorMessage: string): FlowException {
-        var fe = new FlowException();
-        fe.errorCode = errorCode;
-        fe.errorMessage = errorMessage;
-        return fe;
-    }
-
-    public static fromJson(json: string): FlowException {
-        return this.baseFromJson(json, FlowException);
-    }
+  public static fromJson(json: string): FlowException {
+    return this.baseFromJson(json, FlowException);
+  }
 }

@@ -11,10 +11,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { PaymentResponse } from './payment-response';
+import { PaymentResponse, Outcome } from './payment-response';
 
 import { responseData } from './test-data/response';
-import { Outcome } from './payment-response';
 import { TransactionResponseOutcome } from './transaction-response';
 import { Amounts } from './amounts';
 
@@ -24,17 +23,16 @@ describe('PaymentResponse', () => {
   });
 
   it('should deserialise json response correctly', () => {
-    var resp = PaymentResponse.fromJson(responseData);
+    const resp = PaymentResponse.fromJson(responseData);
 
     expect(resp).toBeDefined();
     expect(resp.outcome).toBe(Outcome.FULFILLED);
     expect(resp.transactions).toBeDefined();
-    expect(resp.totalAmountsProcessed).toStrictEqual(Amounts.from(1000, "EUR"));
+    expect(resp.totalAmountsProcessed).toStrictEqual(Amounts.from(1000, 'EUR'));
     expect(resp.getBaskets()).toBeDefined();
     expect(resp.getLastResponse()).toBeDefined();
     expect(resp.getLastResponse().outcome).toBe(TransactionResponseOutcome.APPROVED);
     expect(resp.getLastResponse().references).toBeDefined();
-    expect(resp.getLastResponse().references.getValue("merchantId")).toBe("87654321");
-
+    expect(resp.getLastResponse().references.getValue('merchantId')).toBe('87654321');
   });
 });

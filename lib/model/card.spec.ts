@@ -21,38 +21,37 @@ describe('Card', () => {
   });
 
   it('should not allow pan with more than 10 digits', () => {
-    expect(() => { Card.from("1234567890123456", "Mr T", "0102", null, null) }).toThrowError(InvalidArgumentError);
+    expect(() => { Card.from('1234567890123456', 'Mr T', '0102', null, null); }).toThrowError(InvalidArgumentError);
   });
 
   it('should allow pan with less than 10 digits', () => {
-    var card = Card.from("123456789XXXXXX", "Mr T", "0102", null, null);
-    expect(card.maskedPan).toBe("123456789XXXXXX");
+    const card = Card.from('123456789XXXXXX', 'Mr T', '0102', null, null);
+    expect(card.maskedPan).toBe('123456789XXXXXX');
   });
 
   it('should format expiry date correctly', () => {
-    var card = Card.from("123456789XXXXXX", "Mr T", "2210", null, null);
-    expect(card.getFormattedExpiryDate("MM/YYYY")).toBe("10/2022");
+    const card = Card.from('123456789XXXXXX', 'Mr T', '2210', null, null);
+    expect(card.getFormattedExpiryDate('MM/YYYY')).toBe('10/2022');
   });
 
   it('should return empty when its empty', () => {
-    var card = new Card();
+    const card = new Card();
 
     expect(card.isEmpty()).toBeTruthy();
 
-    card.cardholderName = "bob";
+    card.cardholderName = 'bob';
     expect(card.isEmpty()).toBeFalsy();
   });
 
   it('should return empty correctly when addtional data set', () => {
-    var card = new Card();
+    const card = new Card();
 
     expect(card.isEmpty()).toBeTruthy();
 
-    var ad = new AdditionalData();
-    ad.addData("ghost", "boo");
+    const ad = new AdditionalData();
+    ad.addData('ghost', 'boo');
     card.additionalData = ad;
-    
+
     expect(card.isEmpty()).toBeFalsy();
   });
-
 });

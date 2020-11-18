@@ -11,29 +11,29 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 
+import { v4 as uuid } from 'uuid';
 import { Amounts } from './amounts';
 import { Basket } from './basket';
 import { Customer } from './customer';
 import { Token } from './token';
 import { AdditionalData } from './additional-data';
 
-import { v4 as uuid } from 'uuid';
-import { Jsonable } from "./jsonable";
+import { Jsonable } from './jsonable';
 
 export enum FlowTypes {
-    sale = "sale",
-    refund = "refund",
-    motoSale = "motoSale",
-    motoRefund = "motoRefund",
-    preAuthorisation = "preAuthorisation",
-    preAuthCompletion = "preAuthCompletion",
-    deposit = "deposit",
-    reversal = "reversal",
-    tokenisation = "tokenisation",
-    batchClosure = "batchClosure",
-    receiptDelivery = "receiptDelivery"
+  sale = 'sale',
+  refund = 'refund',
+  motoSale = 'motoSale',
+  motoRefund = 'motoRefund',
+  preAuthorisation = 'preAuthorisation',
+  preAuthCompletion = 'preAuthCompletion',
+  deposit = 'deposit',
+  reversal = 'reversal',
+  tokenisation = 'tokenisation',
+  batchClosure = 'batchClosure',
+  receiptDelivery = 'receiptDelivery',
 }
 
 /**
@@ -41,63 +41,60 @@ export enum FlowTypes {
  *
  * For other type of requests (such as reversals), please see {@link Request}
  */
-@JsonObject("Payment")
+@JsonObject('Payment')
 export class Payment extends Jsonable {
+  @JsonProperty('id')
+  id: string = undefined;
 
-    @JsonProperty("id")
-    id: string = undefined;
+  @JsonProperty('flowType')
+  flowType: string = undefined;
 
-    @JsonProperty("flowType")
-    flowType: string = undefined;
+  @JsonProperty('flowName', String, true)
+  flowName: string = undefined;
 
-    @JsonProperty("flowName", String, true)
-    flowName: string = undefined;
+  @JsonProperty('amounts', Amounts)
+  amounts: Amounts = undefined;
 
-    @JsonProperty("amounts", Amounts)
-    amounts: Amounts = undefined;
+  @JsonProperty('paymentMethod', String, true)
+  paymentMethod: string = undefined;
 
-    @JsonProperty("paymentMethod", String, true)
-    paymentMethod: string = undefined;
+  @JsonProperty('basket', Basket, true)
+  basket: Basket = undefined;
 
-    @JsonProperty("basket", Basket, true)
-    basket: Basket = undefined;
+  @JsonProperty('customer', Customer, true)
+  customer: Customer = undefined;
 
-    @JsonProperty("customer", Customer, true)
-    customer: Customer = undefined;
+  @JsonProperty('splitEnabled', Boolean, true)
+  splitEnabled: boolean = false;
 
-    @JsonProperty("splitEnabled", Boolean, true)
-    splitEnabled: boolean = false;
+  @JsonProperty('cardToken', Token, true)
+  cardToken: Token = undefined;
 
-    @JsonProperty("cardToken", Token, true)
-    cardToken: Token = undefined;
+  @JsonProperty('additionalData', AdditionalData)
+  additionalData: AdditionalData = new AdditionalData();
 
-    @JsonProperty("additionalData", AdditionalData)
-    additionalData: AdditionalData = new AdditionalData();
+  @JsonProperty('isExternalId', Boolean, true)
+  isExternalId: boolean = false;
 
-    @JsonProperty("isExternalId", Boolean, true)
-    isExternalId: boolean = false;
+  @JsonProperty('source', String, true)
+  source: string = undefined;
 
-    @JsonProperty("source", String, true)
-    source: string = undefined;
+  @JsonProperty('deviceId', String, true)
+  deviceId: string = undefined;
 
-    @JsonProperty("deviceId", String, true)
-    deviceId: string = undefined;
+  constructor() {
+    super();
+    this.id = uuid();
+  }
 
-    constructor() {
-        super();
-        this.id = uuid();
-    }
-
-    /**
+  /**
      * Convert a JSON string into an {@link Payment} object if possible
-     * 
+     *
      * @param json The JSON to convert
-     * 
+     *
      * @returns A Payment object
      */
-    public static fromJson(json: string): Payment {
-        return super.baseFromJson(json, Payment);
-    }
-
-
+  public static fromJson(json: string): Payment {
+    return super.baseFromJson(json, Payment);
+  }
 }

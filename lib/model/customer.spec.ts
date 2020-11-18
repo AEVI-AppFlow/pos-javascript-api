@@ -21,15 +21,15 @@ describe('Customer', () => {
   });
 
   it('should serialize and deserialize correctly', () => {
-    var ad = new AdditionalData();
-    ad.addData("cheese", "bire");
-    var token = Token.from("5353535", "card");
-    var tokens = new Array<Token>();
+    const ad = new AdditionalData();
+    ad.addData('cheese', 'bire');
+    const token = Token.from('5353535', 'card');
+    const tokens = new Array<Token>();
     tokens[0] = token;
-    var customer = Customer.from("123", "Jonny Big Cheese", ad, tokens);
+    const customer = Customer.from('123', 'Jonny Big Cheese', ad, tokens);
 
-    var json = customer.toJson();
-    var customerResult = Customer.fromJson(json);
+    const json = customer.toJson();
+    const customerResult = Customer.fromJson(json);
 
     expect(customerResult).toStrictEqual(customer);
   });

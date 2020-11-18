@@ -12,74 +12,80 @@
  *  limitations under the License.
  */
 export class JsonOption {
+  public value: any;
 
-    public value: any;
-    public type?: string;
+  public type?: string;
 
-    constructor() {
+  public static from(value: any, type?: string): JsonOption {
+    const jo = new JsonOption();
+    if (type) {
+      jo.type = type;
+    } else {
+      jo.type = this.getAppFlowJavaObject(value);
     }
-    
-    public static from(value: any, type?: string): JsonOption {
-        var jo = new JsonOption();
-        if(type) {
-            jo.type = type;
-        } else {
-            jo.type = this.getAppFlowJavaObject(value);
-        }
-        jo.value = value;
-        return jo;
-    }
+    jo.value = value;
+    return jo;
+  }
 
-    private static getAppFlowJavaObject(value: any): string {
-        var type = Object(value) === value ? value.constructor.name : typeof(value);
-        switch(type) {            
-            case "AdditionalData":
-            case "Customer":
-            case "Device":
-            case "FlowEvent":
-            case "FlowException":
-            case "Request":
-            case "Response":
-            case "ResponseQuery":
-            case "Token":
-                return `com.aevi.sdk.flow.model.${type}`;
-            case "Amount":
-            case "Amounts":
-            case "Basket": 
-            case "BasketItem": 
-            case "BasketItemModifier":
-            case "Card":
-            case "FlowAppInfo":
-            case "Measurement":
-            case "Merchant":
-            case "Payment":
-            case "PaymentFlowServiceInfo":
-            case "PaymentFlowServices":
-            case "PaymentResponse":
-            case "RoundingStrategy":
-            case "Transaction":
-            case "TransactionRequest":
-            case "TransactionResponse":
-                return `com.aevi.sdk.pos.flow.model.${type}`;            
-            case "number": return "java.lang.Long";
-            case "string": return "java.lang.String";
-            case "boolean": return "java.lang.Boolean";
-            case "any": return "java.lang.Object";
-        }
+  private static getAppFlowJavaObject(value: any): string {
+    const type = Object(value) === value ? value.constructor.name : typeof (value);
+    switch (type) {
+      case 'AdditionalData':
+      case 'Customer':
+      case 'Device':
+      case 'FlowEvent':
+      case 'FlowException':
+      case 'Request':
+      case 'Response':
+      case 'ResponseQuery':
+      case 'Token':
+        return `com.aevi.sdk.flow.model.${type}`;
+      case 'Amount':
+      case 'Amounts':
+      case 'Basket':
+      case 'BasketItem':
+      case 'BasketItemModifier':
+      case 'Card':
+      case 'FlowAppInfo':
+      case 'Measurement':
+      case 'Merchant':
+      case 'Payment':
+      case 'PaymentFlowServiceInfo':
+      case 'PaymentFlowServices':
+      case 'PaymentResponse':
+      case 'RoundingStrategy':
+      case 'Transaction':
+      case 'TransactionRequest':
+      case 'TransactionResponse':
+        return `com.aevi.sdk.pos.flow.model.${type}`;
+      case 'ConfirmationRequest':
+      case 'ConfirmationResponse':
+      case 'FinalAmountRequest':
+      case 'FinalAmountResponse':
+      case 'NotifyAction':
+      case 'ProgressMessage':
+        return `com.aevi.sdk.pos.flow.model.event.${type}`;
+      case 'number': return 'java.lang.Long';
+      case 'string': return 'java.lang.String';
+      case 'boolean': return 'java.lang.Boolean';
+      default:
+      case 'any': return 'java.lang.Object';
     }
-    
-    public static isPrimative(javaType: string): boolean {
-        switch(javaType) {
-            case "java.lang.Boolean":
-            case "java.lang.Long": 
-            case "java.lang.Integer": 
-            case "java.lang.Float": 
-            case "java.lang.Double": 
-            case "java.lang.String": 
-            case "java.lang.Short": 
-            case "java.lang.Char": 
-                return true;
-        }
+  }
+
+  public static isPrimative(javaType: string): boolean {
+    switch (javaType) {
+      case 'java.lang.Boolean':
+      case 'java.lang.Long':
+      case 'java.lang.Integer':
+      case 'java.lang.Float':
+      case 'java.lang.Double':
+      case 'java.lang.String':
+      case 'java.lang.Short':
+      case 'java.lang.Char':
+        return true;
+      default:
         return false;
     }
+  }
 }
