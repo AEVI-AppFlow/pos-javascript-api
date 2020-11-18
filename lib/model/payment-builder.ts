@@ -24,21 +24,30 @@ import { JsonOption } from '../util/json-option';
 /**
  * Builder to construct {@link Payment} objects.
  */
-export class PaymentBuilder{
+export class PaymentBuilder {
+  flowType: string;
 
-    flowType: string;
-    flowName?: string; 
-    amounts: Amounts;
-    basket?: Basket;
-    customer?: Customer;
-    splitEnabled: boolean = false;
-    cardToken?: Token;
-    additionalData?: AdditionalData;
-    source?: string;
-    deviceId?: string;
-    paymentMethod?: string;
+  flowName?: string;
 
-    /**
+  amounts: Amounts;
+
+  basket?: Basket;
+
+  customer?: Customer;
+
+  splitEnabled: boolean = false;
+
+  cardToken?: Token;
+
+  additionalData?: AdditionalData;
+
+  source?: string;
+
+  deviceId?: string;
+
+  paymentMethod?: string;
+
+  /**
      * Set what flow to use based on flow type and name.
      *
      * This ensures that the intended flow is used in the case of multiple flows for the provided type.
@@ -51,13 +60,13 @@ export class PaymentBuilder{
      * @param flowName The name of the flow to use
      * @return This builder
      */
-    public withPaymentFlow(flowType: string, flowName?: string): PaymentBuilder {
-        this.flowType = flowType;
-        this.flowName = flowName;
-        return this;
-    }
+  public withPaymentFlow(flowType: string, flowName?: string): PaymentBuilder {
+    this.flowType = flowType;
+    this.flowName = flowName;
+    return this;
+  }
 
-    /**
+  /**
      * Set the amounts.
      *
      * This parameter is mandatory.
@@ -65,12 +74,12 @@ export class PaymentBuilder{
      * @param amounts The amounts.
      * @return This builder
      */
-    public withAmounts(amounts: Amounts): PaymentBuilder {
-        this.amounts = amounts;
-        return this;
-    }
+  public withAmounts(amounts: Amounts): PaymentBuilder {
+    this.amounts = amounts;
+    return this;
+  }
 
-    /**
+  /**
      * Add a basket for this payment.
      *
      * Note that [[withAmounts]] must be called to reflect the value of the basket. This API and the flow processing service do not
@@ -79,12 +88,12 @@ export class PaymentBuilder{
      * @param basket The basket
      * @return This builder
      */
-    public withBasket(basket: Basket): PaymentBuilder {
-        this.basket = basket;
-        return this;
-    }
+  public withBasket(basket: Basket): PaymentBuilder {
+    this.basket = basket;
+    return this;
+  }
 
-    /**
+  /**
      * Specify the payment method to use for transaction processing for this payment.
      *
      * Setting this has two effects - first it means FPS will filter payment applications based on supported methods, and secondarily it allows
@@ -95,12 +104,12 @@ export class PaymentBuilder{
      * @param paymentMethod The payment method to use for this payment
      * @return This builder
      */
-    public withPaymentMethod(paymentMethod: string): PaymentBuilder {
-        this.paymentMethod = paymentMethod;
-        return this;
-    }
+  public withPaymentMethod(paymentMethod: string): PaymentBuilder {
+    this.paymentMethod = paymentMethod;
+    return this;
+  }
 
-    /**
+  /**
      * Add customer details for this payment.
      *
      * Note that this should not be set for a split payment.
@@ -108,12 +117,12 @@ export class PaymentBuilder{
      * @param customer Customer details
      * @return This builder
      */
-    public withCustomer(customer: Customer): PaymentBuilder {
-        this.customer = customer;
-        return this;
-    }
+  public withCustomer(customer: Customer): PaymentBuilder {
+    this.customer = customer;
+    return this;
+  }
 
-    /**
+  /**
      * Set split enabled for this payment which means it *may* be broken up into multiple sub-payments.
      *
      * It is up to the flow processing service configuration if split is enabled or not. Use {@link PaymentClient#getPaymentSettings()} to get
@@ -124,23 +133,23 @@ export class PaymentBuilder{
      * @param enabled True to enable split, false to disable
      * @return This builder
      */
-    public withSplitEnabled(enabled: boolean): PaymentBuilder {
-        this.splitEnabled = enabled;
-        return this;
-    }
+  public withSplitEnabled(enabled: boolean): PaymentBuilder {
+    this.splitEnabled = enabled;
+    return this;
+  }
 
-    /**
+  /**
      * Set any previously generated card token to use for this transaction.
      *
      * @param cardToken The card {@link Token}
      * @return This builder
      */
-    public withCardToken(cardToken: Token): PaymentBuilder {
-        this.cardToken = cardToken;
-        return this;
-    }
+  public withCardToken(cardToken: Token): PaymentBuilder {
+    this.cardToken = cardToken;
+    return this;
+  }
 
-    /**
+  /**
      * Convenience wrapper for adding additional data.
      *
      * See {@link AdditionalData#addData(String, Object[])} for more info.
@@ -150,109 +159,109 @@ export class PaymentBuilder{
      * @param <T>    The type of object this data is an array of
      * @return This builder
      */
-    public addAdditionalData(key: string, values: any | JsonOption): PaymentBuilder {
-        this.additionalData.addData(key, values);
-        return this;
-    }
+  public addAdditionalData(key: string, values: any | JsonOption): PaymentBuilder {
+    this.additionalData.addData(key, values);
+    return this;
+  }
 
-    /**
+  /**
      * Set the additional data to pass via the payment.
      *
      * @param additionalData The additional data
      * @return This builder
      */
-    public withAdditionalData(additionalData: AdditionalData): PaymentBuilder {
-        this.additionalData = additionalData;
-        return this;
-    }
+  public withAdditionalData(additionalData: AdditionalData): PaymentBuilder {
+    this.additionalData = additionalData;
+    return this;
+  }
 
-    /**
+  /**
      * Get the current additional data model.
      *
      * @return The additional data
      */
-    public getCurrentAdditionalData(): AdditionalData {
-        return this.additionalData;
-    }
+  public getCurrentAdditionalData(): AdditionalData {
+    return this.additionalData;
+  }
 
-    /**
+  /**
      * Set the id of the device this payment should be processed on.
      *
      * @param deviceId The id of the device to process this payment on
      * @return This builder
      */
-    public withDeviceId(deviceId: string): PaymentBuilder {
-        this.deviceId = deviceId;
-        return this;
-    }
+  public withDeviceId(deviceId: string): PaymentBuilder {
+    this.deviceId = deviceId;
+    return this;
+  }
 
-    /**
-     * 
+  /**
+     *
      * @param source Set the source of this message. Usually this is the Id of POS application that is initiating this request
      * @returns This builder
      */
-    public withSource(source: string): PaymentBuilder {
-        this.source = source;
-        return this;
-    }
+  public withSource(source: string): PaymentBuilder {
+    this.source = source;
+    return this;
+  }
 
-    /**
+  /**
      * Build an instance of {@link Payment} using the provided parameters.
      *
      * @return An instance of {@link Payment}
      * @throws IllegalArgumentException for invalid data or combinations of data
      */
-    public build(): Payment {
-        var p = new Payment();
-        p.flowType = this.flowType;
-        p.amounts = this.amounts;
+  public build(): Payment {
+    const p = new Payment();
+    p.flowType = this.flowType;
+    p.amounts = this.amounts;
 
-        if(this.flowName) {
-            p.flowName = this.flowName;
-        }
-
-        if(this.basket) {
-            p.basket = this.basket;
-        }
-
-        if(this.customer) {
-            p.customer = this.customer;
-        }
-
-        p.splitEnabled = this.splitEnabled;
-
-        if(this.cardToken) {
-            p.cardToken = this.cardToken;
-        }
-
-        if(this.additionalData) {
-            p.additionalData = this.additionalData;
-        }
-
-        if(this.source) {
-            p.source = this.source;
-        }
-
-        if(this.deviceId) {
-            p.deviceId = this.deviceId;
-        }
-
-        if(this.paymentMethod) {
-            p.paymentMethod = this.paymentMethod;
-        }
-
-        if(p.cardToken && p.splitEnabled) {
-            throw new InvalidArgumentError("Card token can not be set for a split payment as token relates to only one customer");
-        }
-
-        if(p.basket && p.basket.getTotalBasketValue() != p.amounts.baseAmount) {
-            throw new InvalidArgumentError("The basket total value must match base amounts value");
-        }
-
-        if(p.basket) {
-            p.basket.primaryBasket = true;
-        }
-
-        return p;
+    if (this.flowName) {
+      p.flowName = this.flowName;
     }
+
+    if (this.basket) {
+      p.basket = this.basket;
+    }
+
+    if (this.customer) {
+      p.customer = this.customer;
+    }
+
+    p.splitEnabled = this.splitEnabled;
+
+    if (this.cardToken) {
+      p.cardToken = this.cardToken;
+    }
+
+    if (this.additionalData) {
+      p.additionalData = this.additionalData;
+    }
+
+    if (this.source) {
+      p.source = this.source;
+    }
+
+    if (this.deviceId) {
+      p.deviceId = this.deviceId;
+    }
+
+    if (this.paymentMethod) {
+      p.paymentMethod = this.paymentMethod;
+    }
+
+    if (p.cardToken && p.splitEnabled) {
+      throw new InvalidArgumentError('Card token can not be set for a split payment as token relates to only one customer');
+    }
+
+    if (p.basket && p.basket.getTotalBasketValue() !== p.amounts.baseAmount) {
+      throw new InvalidArgumentError('The basket total value must match base amounts value');
+    }
+
+    if (p.basket) {
+      p.basket.primaryBasket = true;
+    }
+
+    return p;
+  }
 }

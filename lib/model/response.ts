@@ -11,49 +11,44 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 
-import { Jsonable } from "./jsonable";
+import { Jsonable } from './jsonable';
 
 import { Request } from './request';
 import { AdditionalData } from './additional-data';
 
 /**
  * Response to a generic {@link Request} that contains the outcome and bespoke response data for that request type.
- * 
+ *
  * @tsoaModel
  */
 @JsonObject
 export class Response extends Jsonable {
+  @JsonProperty('originatingRequest', Request, true)
+  originatingRequest: Request = undefined;
 
-    @JsonProperty("originatingRequest", Request, true)
-    originatingRequest: Request = undefined;
+  @JsonProperty('success')
+  success: boolean = false;
 
-    @JsonProperty("success")
-    success: boolean = false;
+  @JsonProperty('outcomeMessage')
+  outcomeMessage: string = undefined;
 
-    @JsonProperty("outcomeMessage")
-    outcomeMessage: string = undefined;
+  @JsonProperty('responseData', AdditionalData)
+  responseData: AdditionalData = new AdditionalData();
 
-    @JsonProperty("responseData", AdditionalData)
-    responseData: AdditionalData = new AdditionalData;
+  @JsonProperty('flowServiceId', String, true)
+  flowServiceId: string = undefined;
 
-    @JsonProperty("flowServiceId", String, true)
-    flowServiceId: string = undefined;
+  @JsonProperty('processedInBackground')
+  processedInBackground: boolean = false;
 
-    @JsonProperty("processedInBackground")
-    processedInBackground: boolean = false;
-
-    constructor() {
-        super();
-    }
-
-    /**
+  /**
      * Convert a JSON string into a {@link Response} object if possible
-     * 
+     *
      * @param json The JSON to convert
      */
-    public static fromJson(json: string): Response {
-        return this.baseFromJson(json, Response);
-    }
+  public static fromJson(json: string): Response {
+    return this.baseFromJson(json, Response);
+  }
 }

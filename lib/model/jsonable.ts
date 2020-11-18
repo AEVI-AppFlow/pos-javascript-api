@@ -16,16 +16,16 @@ import { JsonConvert, OperationMode } from 'json2typescript';
 const jsonConvert = new JsonConvert(OperationMode.ENABLE);
 
 export class Jsonable {
-    public toJson(): string {
-        return JSON.stringify(jsonConvert.serialize(this));
-    }
+  public toJson(): string {
+    return JSON.stringify(jsonConvert.serialize(this));
+  }
 
-    public static baseFromJson<T>(json: string,  classReference: { new (): T;} ): T {        
-        var deserialised = JSON.parse(json);
-        return this.baseFromJsonObject(deserialised, classReference);
-    }
+  public static baseFromJson<T>(json: string, classReference: { new (): T;}): T {
+    const deserialised = JSON.parse(json);
+    return this.baseFromJsonObject(deserialised, classReference);
+  }
 
-    public static baseFromJsonObject<T>(jsonObj: any,  classReference: { new (): T;} ): T {
-        return jsonConvert.deserializeObject(jsonObj, classReference);
-    }
+  public static baseFromJsonObject<T>(jsonObj: any, classReference: { new (): T;}): T {
+    return jsonConvert.deserializeObject(jsonObj, classReference);
+  }
 }

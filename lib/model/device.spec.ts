@@ -14,28 +14,26 @@
 import { Device } from './device';
 
 describe('Device', () => {
-
   it('should create an instance', () => {
     expect(new Device()).toBeTruthy();
   });
 
   it('should create from', () => {
-    var device = Device.from("1245452", "Best device eva");
-    expect(device.name).toBe("Best device eva");
-    expect(device.referenceId).toBe("1245452");
+    const device = Device.from('1245452', 'Best device eva');
+    expect(device.name).toBe('Best device eva');
+    expect(device.referenceId).toBe('1245452');
   });
 
-
   it('should serialise and deserialise correctly', () => {
-    var device = new Device();
-    device.name = "Best Device Eva";
-    device.referenceId = "63773662";
-    device.serialNumber = "Kelloggs";
-    device.model = "One";
+    const device = new Device();
+    device.name = 'Best Device Eva';
+    device.referenceId = '63773662';
+    device.serialNumber = 'Kelloggs';
+    device.model = 'One';
 
-    var json = device.toJson();
+    const json = device.toJson();
 
-    var deviceResult = Device.fromJson(json);
+    const deviceResult = Device.fromJson(json);
 
     expect(device).toStrictEqual(deviceResult);
   });

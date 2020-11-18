@@ -11,8 +11,8 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
-import { Jsonable } from "./jsonable";
+import { JsonObject, JsonProperty } from 'json2typescript';
+import { Jsonable } from './jsonable';
 
 /**
  * Token that can be used to identify an entity, typically a customer or a merchant.
@@ -21,30 +21,24 @@ import { Jsonable } from "./jsonable";
  */
 @JsonObject
 export class Token extends Jsonable {
+  @JsonProperty('value', String)
+  value: string = undefined;
 
-    @JsonProperty("value", String)
-    value: string = undefined;
+  @JsonProperty('source', String)
+  source: string = undefined;
 
-    @JsonProperty("source", String)
-    source: string = undefined;
-    
-    @JsonProperty("algorithm", String, true)
-    algorithm: string = undefined;
-    
-    @JsonProperty("sourceAppId", String, true)
-    sourceAppId: string = undefined;
+  @JsonProperty('algorithm', String, true)
+  algorithm: string = undefined;
 
-    constructor() {
-        super();
-    }
+  @JsonProperty('sourceAppId', String, true)
+  sourceAppId: string = undefined;
 
-    public static from(value: string, source: string, algorithm?: string, sourceAppId?: string): Token {
-        var t = new Token();
-        t.value = value;
-        t.source = source;
-        t.algorithm = algorithm;
-        t.sourceAppId = sourceAppId;
-        return t;
-    }
-
- }
+  public static from(value: string, source: string, algorithm?: string, sourceAppId?: string): Token {
+    const t = new Token();
+    t.value = value;
+    t.source = source;
+    t.algorithm = algorithm;
+    t.sourceAppId = sourceAppId;
+    return t;
+  }
+}

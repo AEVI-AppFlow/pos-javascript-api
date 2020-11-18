@@ -11,7 +11,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 import { PreConditions } from '../util/pre-conditions';
 
 /**
@@ -20,27 +20,23 @@ import { PreConditions } from '../util/pre-conditions';
  * Either an absolute amount or a percentage must be set.
  */
 @JsonObject
-export class BasketItemModifier {    
+export class BasketItemModifier {
+  @JsonProperty('id', String, true)
+  id: string = undefined;
 
-    @JsonProperty("id", String, true)
-    id: string = undefined;
+  @JsonProperty('name')
+  name: string = undefined;
 
-    @JsonProperty("name")
-    name: string = undefined;
+  @JsonProperty('type')
+  type: string = undefined;
 
-    @JsonProperty("type")
-    type: string = undefined;
+  @JsonProperty('amount', Number, true)
+  amount: number = undefined;
 
-    @JsonProperty("amount", Number, true)
-    amount: number = undefined;
+  @JsonProperty('percentage', Number, true)
+  percentage: number = undefined;
 
-    @JsonProperty("percentage", Number, true)
-    percentage: number = undefined;
-
-    constructor() {
-    }
-
-    /**
+  /**
      * Create an instance of a modifier.
      *
      * Either an absolute amount or a percentage must be set.
@@ -50,17 +46,17 @@ export class BasketItemModifier {
      * @param type       The type of the modifier.
      * @param amount     The absolute amount of the modifier.
      * @param percentage The percentage applied to the item amounts.
-     * 
+     *
      * @returns The new BaskeTItemModifier instance
      */
-    public static from(name: string, type: string, amount?: number, percentage?: number, id?: string): BasketItemModifier {
-        PreConditions.checkArgument(amount != null || percentage != null, "Either amount or percentage must be set");
-        var bim = new BasketItemModifier();
-        bim.name = name;
-        bim.type = type;
-        bim.amount = amount;
-        bim.percentage = percentage;
-        bim.id = id;        
-        return bim;
-    }
+  public static from(name: string, type: string, amount?: number, percentage?: number, id?: string): BasketItemModifier {
+    PreConditions.checkArgument(amount != null || percentage != null, 'Either amount or percentage must be set');
+    const bim = new BasketItemModifier();
+    bim.name = name;
+    bim.type = type;
+    bim.amount = amount;
+    bim.percentage = percentage;
+    bim.id = id;
+    return bim;
+  }
 }

@@ -11,125 +11,124 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { FlowConfig } from "./flow-config";
-import { FlowApp } from "./flow-app";
+import { FlowConfig } from './flow-config';
+import { FlowApp } from './flow-app';
 
-var flowConfig = FlowConfig.from("blarp", "river", 1, 2, "A description", "yes");
-var apps = new Array<FlowApp>();
+const flowConfig = FlowConfig.from('blarp', 'river', 1, 2, 'A description', 'yes');
+const apps = new Array<FlowApp>();
 
-function setupDefaultApps()  {
-    var app1 = getFlowApp("hydrogen");
-    var app2 = getFlowApp("oxygen");
-    apps.push(app1);
-    apps.push(app2);
+function setupDefaultApps() {
+  const app1 = getFlowApp('hydrogen');
+  const app2 = getFlowApp('oxygen');
+  apps.push(app1);
+  apps.push(app2);
 
-    flowConfig.setApps("cauliflower", apps);
-    flowConfig.setApps("burps", apps);
-    return apps;
+  flowConfig.setApps('cauliflower', apps);
+  flowConfig.setApps('burps', apps);
+  return apps;
 }
 
 function getFlowApp(id: string) {
-    var fa = new FlowApp();
-    fa.id = id;    
-    return fa;
+  const fa = new FlowApp();
+  fa.id = id;
+  return fa;
 }
 
 function checkAppNotReturned(stage: string, appId: string) {
-    var app = flowConfig.getFlowApp(stage, appId);
-    expect(app).toBeNull();
+  const app = flowConfig.getFlowApp(stage, appId);
+  expect(app).toBeNull();
 }
 
 function checkAppNotReturnedFromStage(stage: string) {
-    var app = flowConfig.getFirstAppForStage(stage);
-    expect(app).toBeNull();
+  const app = flowConfig.getFirstAppForStage(stage);
+  expect(app).toBeNull();
 }
 
 function checkHasAppForStage(stage: string, expected: boolean) {
-    expect(flowConfig.hasAppForStage(stage)).toBe(expected);
+  expect(flowConfig.hasAppForStage(stage)).toBe(expected);
 }
 
 describe('FlowConfig', () => {
+  it('should create a flow config', () => {
+    expect(new FlowConfig()).toBeTruthy();
+  });
 
-    it('should create a flow config', () => {
-        expect(new FlowConfig()).toBeTruthy();
-    });
+  it('can get apps for any stage', () => {
+    const stageApps = flowConfig.getAppsForStage('sausage');
 
-    it('can get apps for any stage', () => {
-        var apps = flowConfig.getAppsForStage("sausage");
+    expect(stageApps).toBeDefined();
+    expect(stageApps.length).toBe(0);
+  });
 
-        expect(apps).toBeDefined();
-        expect(apps.length).toBe(0);
-    })
+  it('can add stages', () => {
+    flowConfig.setApps('cauliflower', new Array<FlowApp>());
+    flowConfig.setApps('carrot', new Array<FlowApp>());
 
-    it('can add stages', () => {
-        flowConfig.setApps("cauliflower", new Array<FlowApp>());
-        flowConfig.setApps("carrot", new Array<FlowApp>());
+    const stages = flowConfig.getAllStageNames();
+    expect(stages).toBeDefined();
+    expect(stages).toHaveLength(2);
+    expect(stages).toEqual(expect.arrayContaining(['CAULIFLOWER', 'CARROT']));
+  });
 
-        var stages = flowConfig.getAllStageNames();
-        expect(stages).toBeDefined();
-        expect(stages).toHaveLength(2);
-        expect(stages).toEqual(expect.arrayContaining(["CAULIFLOWER", "CARROT"]));
-    });
+  it('can add apps for stage', () => {
+    setupDefaultApps();
 
-    it('can add apps for stage', () => {
-        setupDefaultApps();
+    const result = flowConfig.getAppsForStage('cauliflower');
+    expect(result).toBeDefined();
+    expect(result).toHaveLength(2);
+    expect(result).toEqual(expect.arrayContaining(apps));
+    expect(flowConfig.containsApp('hydrogen')).toBeTruthy();
+    expect(flowConfig.containsApp('oxygen')).toBeTruthy();
+    expect(flowConfig.containsApp('helium')).toBeFalsy();
 
-        var result = flowConfig.getAppsForStage("cauliflower");
-        expect(result).toBeDefined();
-        expect(result).toHaveLength(2);
-        expect(result).toEqual(expect.arrayContaining(apps));
-        expect(flowConfig.containsApp("hydrogen")).toBeTruthy();
-        expect(flowConfig.containsApp("oxygen")).toBeTruthy();
-        expect(flowConfig.containsApp("helium")).toBeFalsy();
+    const result2 = flowConfig.getAppsForStage('raddish');
+    expect(result2).toBeDefined();
+    expect(result2).toHaveLength(0);
+  });
 
-        var result2 = flowConfig.getAppsForStage("raddish");
-        expect(result2).toBeDefined();
-        expect(result2).toHaveLength(0);
-    });
+  it('check can get app for stage and will return first', () => {
+    setupDefaultApps();
 
-    it('check can get app for stage and will return first', () => {
-        setupDefaultApps();
+    const app = flowConfig.getFirstAppForStage('cauliflower');
 
-        var app = flowConfig.getFirstAppForStage("cauliflower");
+    expect(app).toBeDefined();
+    expect(app.id).toBe('hydrogen');
+  });
 
-        expect(app).toBeDefined();
-        expect(app.id).toBe("hydrogen");
-    });
+  it('check can get app for specific stage', () => {
+    setupDefaultApps();
 
-    it('check can get app for specific stage', () => {
-        setupDefaultApps();
+    const app = flowConfig.getFlowApp('cauliflower', 'hydrogen');
 
-        var app = flowConfig.getFlowApp("cauliflower", "hydrogen");
+    expect(app).toBeDefined();
+    expect(app.id).toBe('hydrogen');
+  });
 
-        expect(app).toBeDefined();
-        expect(app.id).toBe("hydrogen");
-    });
+  it('check wont get app for specified stage if invalid', () => {
+    setupDefaultApps();
 
-    it('check wont get app for specified stage if invalid', () => {
-        setupDefaultApps();
+    checkAppNotReturnedFromStage('raddish');
+    checkAppNotReturnedFromStage('');
+    checkAppNotReturnedFromStage(null);
+  });
 
-        checkAppNotReturnedFromStage("raddish");
-        checkAppNotReturnedFromStage("");
-        checkAppNotReturnedFromStage(null);
-    });
+  it('check wont get app for specified stage is not present', () => {
+    setupDefaultApps();
 
-    it('check wont get app for specified stage is not present', () => {
-        setupDefaultApps();
+    checkAppNotReturned('cauliflower', 'irridium');
+    checkAppNotReturned('raddish', 'hydrogen');
+    checkAppNotReturned(null, 'hydrogen');
+    checkAppNotReturned('cauliflower', null);
+    checkAppNotReturned('', 'hydrogen');
+    checkAppNotReturned('cauliflower', '');
+  });
 
-        checkAppNotReturned("cauliflower", "irridium");
-        checkAppNotReturned("raddish", "hydrogen");
-        checkAppNotReturned(null, "hydrogen");
-        checkAppNotReturned("cauliflower", null);
-        checkAppNotReturned("", "hydrogen");
-        checkAppNotReturned("cauliflower", "");
-    });
-    
-    it('check has app for specified stage', () => {
-        setupDefaultApps();
+  it('check has app for specified stage', () => {
+    setupDefaultApps();
 
-        checkHasAppForStage("cauliflower", true);
-        checkHasAppForStage("burps", true);
-        checkHasAppForStage("", false);
-        checkHasAppForStage(null, false);
-    });
+    checkHasAppForStage('cauliflower', true);
+    checkHasAppForStage('burps', true);
+    checkHasAppForStage('', false);
+    checkHasAppForStage(null, false);
+  });
 });

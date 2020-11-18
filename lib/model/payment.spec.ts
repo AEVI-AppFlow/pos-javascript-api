@@ -21,18 +21,18 @@ describe('Payment', () => {
   });
 
   it('should serialise and deserialise correctly', () => {
-    var amounts = Amounts.from(20, "GBP");
-    var payment = new PaymentBuilder().withPaymentFlow("sale").withAmounts(amounts).build();
+    const amounts = Amounts.from(20, 'GBP');
+    const payment = new PaymentBuilder().withPaymentFlow('sale').withAmounts(amounts).build();
 
-    var json = payment.toJson();
+    const json = payment.toJson();
 
-    var paymentResult = Payment.fromJson(json);
+    const paymentResult = Payment.fromJson(json);
 
     expect(paymentResult.amounts).toStrictEqual(amounts);
     expect(paymentResult).toStrictEqual(payment);
   });
 
   it('invalid json will throw', () => {
-    expect(() => {Payment.fromJson("{}ajksjkdj")}).toThrow(SyntaxError);
+    expect(() => { Payment.fromJson('{}ajksjkdj'); }).toThrow(SyntaxError);
   });
 });

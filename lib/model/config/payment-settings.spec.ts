@@ -15,29 +15,26 @@ import { PaymentSettings } from './payment-settings';
 
 import { paymentSettingsData } from '../test-data/response';
 
-
 describe('PaymentSettings', () => {
+  it('should create an instance', () => {
+    expect(new PaymentSettings()).toBeTruthy();
+  });
 
-    it('should create an instance', () => {
-        expect(new PaymentSettings()).toBeTruthy();
-    });
+  it('should serialise from JSON correctly', () => {
+    const paymentSettings = PaymentSettings.fromJson(paymentSettingsData);
 
-    it('should serialise from JSON correctly', () => {
-        var paymentSettings = PaymentSettings.fromJson(paymentSettingsData);
+    expect(paymentSettings.additionalSettings).toBeDefined();
+    expect(paymentSettings.allServices).toBeDefined();
+    expect(paymentSettings.appFlowSettings).toBeDefined();
+    expect(paymentSettings.flowConfigurations).toBeDefined();
+    expect(paymentSettings.fpsSettings).toBeDefined();
 
-        expect(paymentSettings.additionalSettings).toBeDefined();
-        expect(paymentSettings.allServices).toBeDefined();
-        expect(paymentSettings.appFlowSettings).toBeDefined();
-        expect(paymentSettings.flowConfigurations).toBeDefined();
-        expect(paymentSettings.fpsSettings).toBeDefined();
+    expect(paymentSettings.allServices.paymentFlowServiceInfoList.length).toBe(6);
+    expect(paymentSettings.getServicesForFlow('sampleSale').paymentFlowServiceInfoList.length).toBe(6);
 
-        expect(paymentSettings.allServices.paymentFlowServiceInfoList.length).toBe(6);
-        expect(paymentSettings.getServicesForFlow("sampleSale").paymentFlowServiceInfoList.length).toBe(6);
-
-        expect(paymentSettings.allServices.supportedCurrencies).toHaveLength(3);
-        expect(paymentSettings.allServices.supportedPaymentMethods).toHaveLength(5);
-        expect(paymentSettings.allServices.supportedRequestTypes).toHaveLength(5);
-        expect(paymentSettings.allServices.getFlowServiceFromId("com.aevi.appflow.storage").displayName).toBe("AEVI Developer Data Storage");
-    });
-
+    expect(paymentSettings.allServices.supportedCurrencies).toHaveLength(3);
+    expect(paymentSettings.allServices.supportedPaymentMethods).toHaveLength(5);
+    expect(paymentSettings.allServices.supportedRequestTypes).toHaveLength(5);
+    expect(paymentSettings.allServices.getFlowServiceFromId('com.aevi.appflow.storage').displayName).toBe('AEVI Developer Data Storage');
+  });
 });

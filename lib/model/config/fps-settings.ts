@@ -11,57 +11,52 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 
 @JsonObject
 export class FpsSettings {
+  @JsonProperty('isMultiDevice')
+  isMultiDevice: boolean = false;
 
-    @JsonProperty("isMultiDevice")
-    isMultiDevice: boolean = false;
+  @JsonProperty('isCurrencyChangeAllowed')
+  isCurrencyChangeAllowed: boolean = false;
 
-    @JsonProperty("isCurrencyChangeAllowed")
-    isCurrencyChangeAllowed: boolean = false;
+  @JsonProperty('splitResponseTimeoutSeconds')
+  splitResponseTimeoutSeconds: number = 120;
 
-    @JsonProperty("splitResponseTimeoutSeconds")
-    splitResponseTimeoutSeconds: number = 120;
-    
-    @JsonProperty("flowResponseTimeoutSeconds")
-    flowResponseTimeoutSeconds: number = 120;
-    
-    @JsonProperty("paymentResponseTimeoutSeconds")
-    paymentResponseTimeoutSeconds: number = 120;
-    
-    @JsonProperty("statusUpdateTimeoutSeconds")
-    statusUpdateTimeoutSeconds: number = 120;
-    
-    @JsonProperty("appOrDeviceSelectionTimeoutSeconds")
-    appOrDeviceSelectionTimeoutSeconds: number = 120;
+  @JsonProperty('flowResponseTimeoutSeconds')
+  flowResponseTimeoutSeconds: number = 120;
 
-    @JsonProperty("shouldAbortOnFlowAppError")
-    shouldAbortOnFlowAppError: boolean = false;
-    
-    @JsonProperty("shouldAbortOnPaymentError")
-    shouldAbortOnPaymentError: boolean = false;
-    
-    @JsonProperty("allowAccessViaStatusBar")
-    allowAccessViaStatusBar: boolean = false;
-    
-    @JsonProperty("alwaysAllowDynamicSelect")
-    alwaysAllowDynamicSelect: boolean = false;
-    
-    @JsonProperty("filterServicesByFlowType")
-    filterServicesByFlowType: boolean = true;
-    
-    @JsonProperty("legacyPaymentAppsEnabled")
-    legacyPaymentAppsEnabled: boolean = false;
-    
-    @JsonProperty("alwaysCallPreFlow")
-    alwaysCallPreFlow: boolean = false;
+  @JsonProperty('paymentResponseTimeoutSeconds')
+  paymentResponseTimeoutSeconds: number = 120;
 
-    @JsonProperty("databaseRowLimit")
-    databaseRowLimit: number = 100;
+  @JsonProperty('statusUpdateTimeoutSeconds')
+  statusUpdateTimeoutSeconds: number = 120;
 
-    constructor() {
+  @JsonProperty('appOrDeviceSelectionTimeoutSeconds')
+  appOrDeviceSelectionTimeoutSeconds: number = 120;
 
-    }
+  @JsonProperty('shouldAbortOnFlowAppError')
+  shouldAbortOnFlowAppError: boolean = false;
+
+  @JsonProperty('shouldAbortOnPaymentError')
+  shouldAbortOnPaymentError: boolean = false;
+
+  @JsonProperty('allowAccessViaStatusBar')
+  allowAccessViaStatusBar: boolean = false;
+
+  @JsonProperty('alwaysAllowDynamicSelect')
+  alwaysAllowDynamicSelect: boolean = false;
+
+  @JsonProperty('filterServicesByFlowType')
+  filterServicesByFlowType: boolean = true;
+
+  @JsonProperty('legacyPaymentAppsEnabled')
+  legacyPaymentAppsEnabled: boolean = false;
+
+  @JsonProperty('alwaysCallPreFlow')
+  alwaysCallPreFlow: boolean = false;
+
+  @JsonProperty('databaseRowLimit')
+  databaseRowLimit: number = 100;
 }

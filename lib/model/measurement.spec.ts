@@ -15,6 +15,6 @@ import { Measurement } from './measurement';
 
 describe('Measurement', () => {
   it('should create an instance', () => {
-    expect(Measurement.from(27827, "kg")).toBeTruthy();
+    expect(Measurement.from(27827, 'kg')).toBeTruthy();
   });
 });

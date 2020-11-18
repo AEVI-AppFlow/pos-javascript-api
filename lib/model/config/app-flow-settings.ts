@@ -11,23 +11,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 
 @JsonObject
 export class AppFlowSettings {
+  @JsonProperty('dateFormat')
+  dateFormat: string = undefined;
 
-    @JsonProperty("dateFormat")
-    dateFormat: string = undefined;
+  @JsonProperty('timeFormat')
+  timeFormat: string = undefined;
 
-    @JsonProperty("timeFormat")
-    timeFormat: string = undefined;
+  @JsonProperty('primaryCurrency', String, true)
+  primaryCurrency: string = undefined;
 
-    @JsonProperty("primaryCurrency", String, true)
-    primaryCurrency: string = undefined;
+  @JsonProperty('primaryLanguage')
+  primaryLanguage: string = undefined;
 
-    @JsonProperty("primaryLanguage")
-    primaryLanguage: string = undefined;
-
-    @JsonProperty("commsChannel")
-    commsChannel: string = undefined;
+  @JsonProperty('commsChannel')
+  commsChannel: string = undefined;
 }

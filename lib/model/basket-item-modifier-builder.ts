@@ -18,32 +18,34 @@ import { BasketItemModifier } from './basket-item-modifier';
  * A builder to create {@link BasketItemModifier} instances
  */
 export class BasketItemModifierBuilder {
-    private id: string;
-    private amount: number;
-    private percentage: number;
+  private id: string;
 
-    /**
+  private amount: number;
+
+  private percentage: number;
+
+  /**
      * Create an instance of this builder
      *
      * @param name The name of the modifier you are building
      * @param type The type of modifier you are building
      */
-    constructor(public readonly name: string, public readonly type: string) {
+  constructor(public readonly name: string, public readonly type: string) {
 
-    }
+  }
 
-    /**
+  /**
      * Set the id for this item modifier (optional).
      *
      * @param id The id
      * @return This builder
      */
-    public withId(id: string): BasketItemModifierBuilder {
-        this.id = id;
-        return this;
-    }
+  public withId(id: string): BasketItemModifierBuilder {
+    this.id = id;
+    return this;
+  }
 
-    /**
+  /**
      * Set the absolute amount of this modifier in subunit form (e.g pence / cents). This amount may be fractional i.e. fractions of one cent/penny.
      * A fractional value may used in cases such as representing a tax amount that needs to be correct to several decimal places of accuracy when
      * these item modifiers are added together as a part of a whole transaction. If a fractional value is not required then use
@@ -54,12 +56,12 @@ export class BasketItemModifierBuilder {
      * @param amount The amount
      * @return This builder
      */
-    public withAmount(amount: number): BasketItemModifierBuilder {
-        this.amount = amount;
-        return this;
-    }
+  public withAmount(amount: number): BasketItemModifierBuilder {
+    this.amount = amount;
+    return this;
+  }
 
-    /**
+  /**
      * Set the percentage rate for this modifier.
      *
      * The percentage is represented as a float value, such as 25.75 for 25.75%.
@@ -69,22 +71,21 @@ export class BasketItemModifierBuilder {
      * @param percentage The percentage
      * @return This builder
      */
-    public withPercentage(percentage: number): BasketItemModifierBuilder {
-        this.percentage = percentage;
-        return this;
-    }
+  public withPercentage(percentage: number): BasketItemModifierBuilder {
+    this.percentage = percentage;
+    return this;
+  }
 
-    /**
+  /**
      * Build the modifier instance.
      *
      * As well as name and type either an absolute amount or a percentage must also be set otherwise this method will throw an {@link IllegalArgumentException}.
      *
      * @return A {@link BasketItemModifier} instance
      */
-    public build(): BasketItemModifier {
-        PreConditions.checkArgument(this.amount != null || this.percentage != null, "Either amount or percentage must be set");
+  public build(): BasketItemModifier {
+    PreConditions.checkArgument(this.amount != null || this.percentage != null, 'Either amount or percentage must be set');
 
-        return BasketItemModifier.from(this.name, this.type, this.amount, this.percentage, this.id);
-    }
-
+    return BasketItemModifier.from(this.name, this.type, this.amount, this.percentage, this.id);
+  }
 }

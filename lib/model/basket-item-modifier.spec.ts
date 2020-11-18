@@ -16,31 +16,30 @@ import { InvalidArgumentError } from '../util/pre-conditions';
 
 describe('BasketItemModifier', () => {
   it('should create an instance for an amount', () => {
-    expect(BasketItemModifier.from("bob", "thing", 1000)).toBeTruthy();
+    expect(BasketItemModifier.from('bob', 'thing', 1000)).toBeTruthy();
   });
 
   it('should create an instance for a percentage', () => {
-    expect(BasketItemModifier.from("bob", "thing",  undefined, 10)).toBeTruthy();
+    expect(BasketItemModifier.from('bob', 'thing', undefined, 10)).toBeTruthy();
   });
 
   it('should throw if no amount', () => {
-    expect(() => {BasketItemModifier.from("bob", "thing")}).toThrowError(InvalidArgumentError);
+    expect(() => { BasketItemModifier.from('bob', 'thing'); }).toThrowError(InvalidArgumentError);
   });
 
   it('should throw if no percentage', () => {
-    expect(() => {BasketItemModifier.from("bob", "thing", undefined)}).toThrowError(InvalidArgumentError);
+    expect(() => { BasketItemModifier.from('bob', 'thing', undefined); }).toThrowError(InvalidArgumentError);
   });
 
   it('should accept just amount', () => {
-    expect(BasketItemModifier.from("name", "type", 100)).toBeTruthy();
+    expect(BasketItemModifier.from('name', 'type', 100)).toBeTruthy();
   });
 
   it('should accept just percentage', () => {
-    expect(BasketItemModifier.from("name", "type", undefined, 2.5)).toBeTruthy();
+    expect(BasketItemModifier.from('name', 'type', undefined, 2.5)).toBeTruthy();
   });
 
   it('should build full instanace', () => {
-    expect(BasketItemModifier.from("name", "type", 100, 2.5, "bla")).toBeTruthy();
+    expect(BasketItemModifier.from('name', 'type', 100, 2.5, 'bla')).toBeTruthy();
   });
-
 });

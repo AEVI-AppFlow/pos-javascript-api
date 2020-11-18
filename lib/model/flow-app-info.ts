@@ -11,20 +11,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { JsonObject, JsonProperty } from "json2typescript";
+import { JsonObject, JsonProperty } from 'json2typescript';
 
 /**
  * Represents information about a "flow app" that was executed as part of a transaction.
  */
 @JsonObject
 export class FlowAppInfo {
+  @JsonProperty('flowAppId')
+  flowAppId: string = undefined;
 
-    @JsonProperty("flowAppId")
-    flowAppId: string = undefined;
+  @JsonProperty('stage')
+  stage: string = undefined;
 
-    @JsonProperty("stage")
-    stage: string = undefined;
-
-    @JsonProperty("augmentedData")
-    augmentedData: Array<string> = undefined;
+  @JsonProperty('augmentedData')
+  augmentedData: Array<string> = undefined;
 }
