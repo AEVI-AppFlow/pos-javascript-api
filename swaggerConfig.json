@@ -1,0 +1,10 @@
+{
+    "swagger": {
+        "basePath": "/v0.0.7",
+        "outputDirectory": "./dist",
+        "outputFormat": "OpenApi_3",        
+        "entryFile": [
+            "./lib/payment-client.ts"
+        ]
+    }
+}
