@@ -19,7 +19,7 @@ import { PreConditions } from '../util/pre-conditions';
  *
  * Either an absolute amount or a percentage must be set.
  */
-@JsonObject
+@JsonObject('BasketItemModifier')
 export class BasketItemModifier {
   @JsonProperty('id', String, true)
   id: string = undefined;

@@ -19,7 +19,7 @@ import { Jsonable } from './jsonable';
 /**
  * Represents an event in the flow.
  */
-@JsonObject
+@JsonObject('FlowEvent')
 export class FlowEvent extends Jsonable {
   @JsonProperty('type')
   type: string = undefined;

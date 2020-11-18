@@ -18,7 +18,7 @@ import { PaymentFlowServiceInfo } from './payment-flow-service-info';
 /**
  * Exposes payment and flow services information with helper methods to retrieve collated data across all services.
  */
-@JsonObject
+@JsonObject('PaymentFlowServices')
 export class PaymentFlowServices {
   @JsonProperty('paymentFlowServiceInfoList', [PaymentFlowServiceInfo])
   paymentFlowServiceInfoList: Array<PaymentFlowServiceInfo> = [];

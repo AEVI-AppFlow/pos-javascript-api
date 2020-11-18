@@ -19,7 +19,7 @@ import { Jsonable } from './jsonable';
  *
  * How the value is generated is bespoke to the application that fulfilled the request.
  */
-@JsonObject
+@JsonObject('Token')
 export class Token extends Jsonable {
   @JsonProperty('value', String)
   value: string = undefined;

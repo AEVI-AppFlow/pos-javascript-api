@@ -18,7 +18,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
  *
  * Examples are "2.5 kilograms" or "13.45 feet".
  */
-@JsonObject
+@JsonObject('Measurement')
 export class Measurement {
   @JsonProperty('value')
   value: number = undefined;

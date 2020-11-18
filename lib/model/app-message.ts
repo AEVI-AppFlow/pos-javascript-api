@@ -8,7 +8,7 @@ import { Request } from './request';
 
 const API_COMPATIBILITY_VERSION = '2.1.2';
 
-@JsonObject
+@JsonObject('InternalData')
 export class InternalData extends Jsonable {
   @JsonProperty('senderApiVersion', String)
   senderApiVersion: string;
@@ -24,7 +24,7 @@ export class InternalData extends Jsonable {
   }
 }
 
-@JsonObject
+@JsonObject('AppMessage')
 export class AppMessage extends Jsonable {
   @JsonProperty('messageType', String)
   messageType: string = undefined; // See AppMessageTypes

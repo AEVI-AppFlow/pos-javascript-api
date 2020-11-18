@@ -45,7 +45,7 @@ export enum FailureReason {
  *
  * This class contains convenience methods to get overall information for the transaction processing.
  */
-@JsonObject
+@JsonObject('PaymentResponse')
 export class PaymentResponse extends Jsonable {
   @JsonProperty('id')
   id: string = undefined;

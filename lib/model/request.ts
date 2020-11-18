@@ -25,7 +25,7 @@ import { AdditionalData } from './additional-data';
  *
  * @tsoaModel
  */
-@JsonObject
+@JsonObject('Request')
 export class Request extends Jsonable {
   @JsonProperty('id')
   id: string = undefined;

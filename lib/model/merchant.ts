@@ -36,7 +36,7 @@ export enum MerchantTokenKeys {
 /**
  * A model to store merchant data such as address and contact details
  */
-@JsonObject
+@JsonObject('Merchant')
 export class Merchant extends Jsonable {
   @JsonProperty('umpId')
   umpId: string = undefined;

@@ -23,7 +23,7 @@ import { Jsonable } from '../jsonable';
 const REQUEST_CLASS_GENERIC = 'generic';
 const REQUEST_CLASS_PAYMENT = 'payment';
 
-@JsonObject
+@JsonObject('FlowConfig')
 export class FlowConfig {
   @JsonProperty('name')
   name: string = undefined;

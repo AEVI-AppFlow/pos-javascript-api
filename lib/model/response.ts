@@ -23,7 +23,7 @@ import { AdditionalData } from './additional-data';
  *
  * @tsoaModel
  */
-@JsonObject
+@JsonObject('Response')
 export class Response extends Jsonable {
   @JsonProperty('originatingRequest', Request, true)
   originatingRequest: Request = undefined;

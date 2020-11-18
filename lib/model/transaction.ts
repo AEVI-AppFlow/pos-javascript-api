@@ -34,7 +34,7 @@ import { FlowStages } from './constants';
  * Use [[requestedAmounts]] to retrieve the total amount requested for this transaction, and [[getRemainingAmounts]] to retrieve
  * the amounts remaining to pay for this transaction, if any.
  */
-@JsonObject
+@JsonObject('Transaction')
 export class Transaction {
   @JsonProperty('requestedAmounts', Amounts)
   requestedAmounts: Amounts = undefined;

@@ -13,7 +13,7 @@
  */
 import { JsonObject, JsonProperty } from 'json2typescript';
 
-@JsonObject
+@JsonObject('FpsSettings')
 export class FpsSettings {
   @JsonProperty('isMultiDevice')
   isMultiDevice: boolean = false;
