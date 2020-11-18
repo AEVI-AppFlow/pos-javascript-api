@@ -1,0 +1,6 @@
+{
+    "name": "AppFlow Typescript Payment Initiation API",
+    "out": "dist/docs",
+    "exclude": "**/*+(.spec|.e2e).ts",
+    "excludePrivate": true
+}
