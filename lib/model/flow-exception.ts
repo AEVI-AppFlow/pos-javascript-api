@@ -21,7 +21,7 @@ import { Jsonable } from './jsonable';
  *
  * The errorMessage contained in the exception is a human readable message that should be used for debugging purposes only
  */
-@JsonObject
+@JsonObject('FlowException')
 export class FlowException extends Jsonable {
   @JsonProperty('errorCode', String)
   errorCode: string = undefined;

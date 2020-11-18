@@ -17,7 +17,7 @@ import { Observable, from } from 'rxjs';
 
 import { FlowConfig } from './flow-config';
 
-@JsonObject
+@JsonObject('FlowConfigurations')
 export class FlowConfigurations {
   @JsonProperty('flowConfigurations', [FlowConfig])
   flowConfigurations: Array<FlowConfig> = [];

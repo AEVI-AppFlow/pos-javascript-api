@@ -1,6 +1,6 @@
 {
   "name": "appflow-payment-initiation-api",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "API that provides the ability to initiate AppFlow payment requests",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@types/uuid": "^3.4.5",
-    "json2typescript": "^1.2.3",
+    "json2typescript": "^1.4.1",
     "moment": "^2.24.0",
     "rxjs": "6.6.3",
     "typescript-rest": "^3.0.1",

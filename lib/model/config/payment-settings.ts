@@ -23,7 +23,7 @@ import { AppExecutionType } from './flow-stage';
 
 import { Jsonable } from '../jsonable';
 
-@JsonObject
+@JsonObject('PaymentSettings')
 export class PaymentSettings {
   @JsonProperty('flowConfigurations', FlowConfigurations)
   flowConfigurations: FlowConfigurations = undefined;

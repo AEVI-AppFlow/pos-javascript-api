@@ -25,7 +25,7 @@ export enum DeviceDataKeys {
 /**
  * Represents a device.
  */
-@JsonObject
+@JsonObject('Device')
 export class Device extends Jsonable {
   @JsonProperty('referenceId')
   referenceId: string = undefined;

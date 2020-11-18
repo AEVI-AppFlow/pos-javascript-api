@@ -14,7 +14,7 @@
 import { JsonObject, JsonProperty } from 'json2typescript';
 import { Jsonable } from './jsonable';
 
-@JsonObject
+@JsonObject('ResponseQuery')
 export class ResponseQuery extends Jsonable {
   @JsonProperty('requestId', String, true)
   requestId: string = undefined;

@@ -18,7 +18,7 @@ import { AdditionalData } from './additional-data';
 /**
  * Represents the capabilities of a flow service.
  */
-@JsonObject
+@JsonObject('PaymentFlowServiceInfo')
 export class PaymentFlowServiceInfo {
   @JsonProperty('id')
   id: string = undefined;

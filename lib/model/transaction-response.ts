@@ -25,7 +25,7 @@ export enum TransactionResponseOutcome {
 /**
  * A transaction response representing the outcome of processing a {@link TransactionRequest}.
  */
-@JsonObject
+@JsonObject('TransactionResponse')
 export class TransactionResponse {
   @JsonProperty('id')
   id: string = undefined;

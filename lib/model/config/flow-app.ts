@@ -13,7 +13,7 @@
  */
 import { JsonObject, JsonProperty } from 'json2typescript';
 
-@JsonObject
+@JsonObject('FlowApp')
 export class FlowApp {
   @JsonProperty('id')
   id: string = undefined;

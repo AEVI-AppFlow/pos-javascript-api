@@ -13,7 +13,7 @@
  */
 import { JsonObject, JsonProperty } from 'json2typescript';
 
-@JsonObject
+@JsonObject('AppFlowSettings')
 export class AppFlowSettings {
   @JsonProperty('dateFormat')
   dateFormat: string = undefined;

@@ -16,7 +16,7 @@ import { JsonObject, JsonProperty } from 'json2typescript';
 /**
  * Represents information about a "flow app" that was executed as part of a transaction.
  */
-@JsonObject
+@JsonObject('FlowAppInfo')
 export class FlowAppInfo {
   @JsonProperty('flowAppId')
   flowAppId: string = undefined;

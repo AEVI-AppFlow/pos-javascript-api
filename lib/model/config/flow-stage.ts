@@ -25,7 +25,7 @@ export enum AppExecutionType {
   NONE = 'NONE',
 }
 
-@JsonObject
+@JsonObject('FlowStage')
 export class FlowStage {
   @JsonProperty('name')
   name: string = undefined;
