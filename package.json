@@ -10,7 +10,7 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "docs": "typedoc lib",
-    "lint": "eslint lib/* --ext .ts --fix"
+    "lint": "eslint lib/* --ext .ts"
   },
   "author": "Brett Cherrington",
   "license": "Apache-2.0",
