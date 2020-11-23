@@ -43,10 +43,9 @@ export interface PaymentClient {
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
      *
      * @param request The request
-     * @param options An object providing specific parameters to the underlying implementation
      * @return Promise that represents the acceptance of the request
      */
-  initiateRequest(request: Request, options?: PaymentClientOptions): Promise<void>;
+  initiateRequest(request: Request): Promise<void>;
 
   /**
      * Initiate payment processing based on the provided {@link Payment}.
@@ -64,17 +63,16 @@ export interface PaymentClient {
      * that further describes the problem. These values are not intended to be presented directly to the merchant.
      *
      * @param payment The payment to process
-     * @param options An object providing specific parameters to the underlying implementation
      * @return Promise that represents the acceptance of the request
      */
-  initiatePayment(payment: Payment, options?: PaymentClientOptions): Promise<void>;
+  initiatePayment(payment: Payment): Promise<void>;
 
   /**
      * Send a flow event to the processing service. This event will picked up by services/flow apps registered for listening to events
      *
      * @param flowEvent The event to send
      */
-  sendEvent(flowEvent: FlowEvent, options?: PaymentClientOptions): Promise<void>;
+  sendEvent(flowEvent: FlowEvent): Promise<void>;
 
   /**
      * Query for devices connected to the processing service, if multi-device is enabled.
@@ -87,10 +85,9 @@ export interface PaymentClient {
      *
      * You can subscribe to [[subscribeToSystemEvents]] for updates on changes to the available devices.
      *
-     * @param options An object providing specific parameters to the underlying implementation
      * @return Observable stream emitting a list of {@link Device} objects containing basic device info
      */
-  getDevices(options?: PaymentClientOptions): Promise<Array<Device>>;
+  getDevices(): Promise<Array<Device>>;
 
   /**
      * Update device details.
@@ -98,37 +95,33 @@ export interface PaymentClient {
      * Not all fields of devices are able to be updated. The exact fields allowed will be dependent on the underlying implementation
      *
      * @param device The device object to update
-     * @param options An object providing specific parameters to the underlying implementation
      */
-  updateDevice(device: Device, options?: PaymentClientOptions): Promise<Device>;
+  updateDevice(device: Device): Promise<Device>;
 
   /**
      * Subscribe to general system events.
      *
      * Examples are when there are changed to devices, applications or system settings.
      *
-     * @param options An object providing specific parameters to the underlying implementation
      * @return A stream that will emit {@link FlowEvent} items
      */
-  subscribeToSystemEvents(options?: PaymentClientOptions): Observable<FlowEvent>;
+  subscribeToSystemEvents(): Observable<FlowEvent>;
 
   /**
      * Subscribe to flow events.
      *
      * Examples are when there are changed to devices, applications or system settings.
      *
-     * @param options An object providing specific parameters to the underlying implementation
      * @return A stream that will emit {@link FlowEvent} items
      */
-  subscribeToFlowEvents(options?: PaymentClientOptions): Observable<FlowEvent>;
+  subscribeToFlowEvents(): Observable<FlowEvent>;
 
   /**
      * Subscribe to payment response that are sent asynchronously to this client
      *
-     * @param options An object providing specific parameters to the underlying implementation
      * @retun A stream of {@link PaymentResponse} that are sent for every {@link Payment} requested
      */
-  subscribeToPaymentResponses(options?: PaymentClientOptions): Observable<PaymentResponse>;
+  subscribeToPaymentResponses(): Observable<PaymentResponse>;
 
   /**
      * Subscribe to ALL payment response errors sent back to this application
@@ -138,18 +131,16 @@ export interface PaymentClient {
      *
      * This message is not intended for the end user (merchant). Instead the `errorCode` value should be used to lookup a suitable message for your user.
      *
-     * @param options An object providing specific parameters to the underlying implementation
      * @return A stream that will emit response errors that are sent from the processing service.
      */
-  subscribeToPaymentResponseErrors(options?: PaymentClientOptions): Observable<FlowException>
+  subscribeToPaymentResponseErrors(): Observable<FlowException>
 
   /**
      * Subscribe to generic responses that are sent asynchronously to this client
      *
-     * @param options An object providing specific parameters to the underlying implementation
      * @retun A stream of {@link Response} that are sent for every {@link Request} requested
      */
-  subscribeToResponses(options?: PaymentClientOptions): Observable<Response>
+  subscribeToResponses(): Observable<Response>
 
   /**
      * Subscribe to ALL generic response errors sent back to this application
@@ -159,8 +150,7 @@ export interface PaymentClient {
      *
      * This message is not intended for the end user (merchant). Instead the `errorCode` value should be used to lookup a suitable message for your user.
      *
-     * @param options An object providing specific parameters to the underlying implementation
      * @return A stream that will emit response errors that are sent from the processing service.
      */
-  subscribeToResponseErrors(options?: PaymentClientOptions): Observable<FlowException>
+  subscribeToResponseErrors(): Observable<FlowException>
 }

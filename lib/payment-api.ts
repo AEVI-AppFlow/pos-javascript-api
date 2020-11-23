@@ -11,7 +11,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-import { PaymentClient } from './payment-client';
+import { PaymentClient, PaymentClientOptions } from './payment-client';
 
 export interface PaymentApi {
 
@@ -43,8 +43,10 @@ export interface PaymentApi {
   /**
      * Get a new instance of a {@link PaymentClient} to initiate payments.
      *
+     * @param options An optional list of key value pairs used to setup the payment client implentation
+     *
      * @return An instance of {@link PaymentClient}
      */
-  getPaymentClient(): PaymentClient;
+  getPaymentClient(options?: PaymentClientOptions): PaymentClient;
 
 }
