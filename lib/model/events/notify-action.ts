@@ -18,7 +18,7 @@ import { Jsonable } from '../jsonable';
 @JsonObject('NotifyAction')
 export class NotifyAction extends Jsonable {
   @JsonProperty('type')
-  public type: string = undefined;
+  type: string = undefined;
 
   /**
      * Convert a JSON string into an {@link NotifyAction} object if possible

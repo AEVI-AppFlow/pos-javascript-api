@@ -18,16 +18,16 @@ import { Jsonable } from '../jsonable';
 @JsonObject('Receipt')
 export class Receipt extends Jsonable {
   @JsonProperty('receiptType')
-  public receiptType: string = undefined;
+  receiptType: string = undefined;
 
   @JsonProperty('receiptText', String, true)
-  public receiptText: string = undefined;
+  receiptText?: string = undefined;
 
   @JsonProperty('receiptData', String, true)
-  public receiptData: string = undefined;
+  receiptData?: string = undefined;
 
   @JsonProperty('receiptDataFormat', String, true)
-  public receiptDataFormat: string = undefined;
+  receiptDataFormat?: string = undefined;
 
   /**
      * Convert a JSON string into an {@link Receipt} object if possible

@@ -50,25 +50,25 @@ export class Payment extends Jsonable {
   flowType: string = undefined;
 
   @JsonProperty('flowName', String, true)
-  flowName: string = undefined;
+  flowName?: string = undefined;
 
   @JsonProperty('amounts', Amounts)
   amounts: Amounts = undefined;
 
   @JsonProperty('paymentMethod', String, true)
-  paymentMethod: string = undefined;
+  paymentMethod?: string = undefined;
 
   @JsonProperty('basket', Basket, true)
-  basket: Basket = undefined;
+  basket?: Basket = undefined;
 
   @JsonProperty('customer', Customer, true)
-  customer: Customer = undefined;
+  customer?: Customer = undefined;
 
   @JsonProperty('splitEnabled', Boolean, true)
   splitEnabled: boolean = false;
 
   @JsonProperty('cardToken', Token, true)
-  cardToken: Token = undefined;
+  cardToken?: Token = undefined;
 
   @JsonProperty('additionalData', AdditionalData)
   additionalData: AdditionalData = new AdditionalData();
@@ -77,10 +77,10 @@ export class Payment extends Jsonable {
   isExternalId: boolean = false;
 
   @JsonProperty('source', String, true)
-  source: string = undefined;
+  source?: string = undefined;
 
   @JsonProperty('deviceId', String, true)
-  deviceId: string = undefined;
+  deviceId?: string = undefined;
 
   constructor() {
     super();

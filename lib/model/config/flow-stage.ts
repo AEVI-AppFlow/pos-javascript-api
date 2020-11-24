@@ -38,7 +38,7 @@ export class FlowStage {
 
   // FIXME - at this time json2typescript doesn't support circular models so this has to be a default object here instead of a FlowConfig as it should be
   @JsonProperty('innerFlow', Any, true)
-  innerFlow: FlowConfig = undefined;
+  innerFlow?: FlowConfig = undefined;
 
   public static from(name: string, appExecutionType: AppExecutionType): FlowStage {
     const fs = new FlowStage();

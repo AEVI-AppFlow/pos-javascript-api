@@ -22,5 +22,5 @@ export class FlowApp {
   mandatory: boolean = false;
 
   @JsonProperty('conditionalOn', String, true)
-  conditionalOn: string = undefined;
+  conditionalOn?: string = undefined;
 }

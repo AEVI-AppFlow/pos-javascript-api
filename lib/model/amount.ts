@@ -20,10 +20,10 @@ import { Jsonable } from './jsonable';
 @JsonObject('Amount')
 export class Amount extends Jsonable {
   @JsonProperty('value')
-  public value: number = 0;
+  value: number = 0;
 
   @JsonProperty('currency')
-  public currency: string = 'XXX';
+  currency: string = 'XXX';
 
   /**
      * Convert a JSON string into an {@link Amount} object if possible
