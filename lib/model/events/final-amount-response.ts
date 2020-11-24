@@ -28,7 +28,7 @@ export class FinalAmountResponse extends Jsonable {
   type: FinalAmountStatusType = undefined;
 
   @JsonProperty('amount', Amounts, true)
-  amount?: Amounts;
+  amount?: Amounts = undefined;
 
   /**
      * Convert a JSON string into an {@link FinalAmountResponse} object if possible
