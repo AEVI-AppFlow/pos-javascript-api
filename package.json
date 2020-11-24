@@ -1,6 +1,6 @@
 {
   "name": "appflow-payment-initiation-api",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "API that provides the ability to initiate AppFlow payment requests",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
