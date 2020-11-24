@@ -29,31 +29,31 @@ import { AdditionalData } from './additional-data';
 @JsonObject('BasketItem')
 export class BasketItem {
   @JsonProperty('id')
-  public id: string = undefined;
+  id: string = undefined;
 
   @JsonProperty('label')
-  public label: string = undefined;
+  label: string = undefined;
 
   @JsonProperty('category', String, true)
-  public category: string = undefined;
+  category?: string = undefined;
 
   @JsonProperty('amount')
-  public amount: number = undefined;
+  amount: number = undefined;
 
   @JsonProperty('baseAmount')
-  public baseAmount: number = undefined;
+  baseAmount: number = undefined;
 
   @JsonProperty('quantity')
-  public quantity: number = undefined;
+  quantity: number = undefined;
 
   @JsonProperty('measurement', Measurement, true)
-  public measurement?: Measurement = undefined;
+  measurement?: Measurement = undefined;
 
   @JsonProperty('modifiers', [BasketItemModifier], true)
-  public modifiers?: Array<BasketItemModifier> = undefined;
+  modifiers?: Array<BasketItemModifier> = undefined;
 
   @JsonProperty('itemData', AdditionalData, true)
-  public itemData = new AdditionalData();
+  itemData = new AdditionalData();
 
   /**
      * Create a new basket item with label, category, amount (inclusive of tax) and quantity.

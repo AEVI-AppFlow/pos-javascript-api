@@ -28,10 +28,10 @@ export class Token extends Jsonable {
   source: string = undefined;
 
   @JsonProperty('algorithm', String, true)
-  algorithm: string = undefined;
+  algorithm?: string = undefined;
 
   @JsonProperty('sourceAppId', String, true)
-  sourceAppId: string = undefined;
+  sourceAppId?: string = undefined;
 
   public static from(value: string, source: string, algorithm?: string, sourceAppId?: string): Token {
     const t = new Token();

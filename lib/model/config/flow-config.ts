@@ -38,7 +38,7 @@ export class FlowConfig {
   apiMajorVersion: number = undefined;
 
   @JsonProperty('description', String, true)
-  description: string = undefined;
+  description?: string = undefined;
 
   @JsonProperty('restrictedToApp', String, true)
   restrictedToApp: string = '';

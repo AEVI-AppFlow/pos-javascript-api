@@ -37,7 +37,7 @@ export class Amounts extends Jsonable {
   currencyExchangeRate: number = 0;
 
   @JsonProperty('originalCurrency', String, true)
-  originalCurrency: string = undefined;
+  originalCurrency?: string = undefined;
 
   /**
      * Convert a JSON string into an {@link Amounts} object if possible

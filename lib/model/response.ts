@@ -38,7 +38,7 @@ export class Response extends Jsonable {
   responseData: AdditionalData = new AdditionalData();
 
   @JsonProperty('flowServiceId', String, true)
-  flowServiceId: string = undefined;
+  flowServiceId?: string = undefined;
 
   @JsonProperty('processedInBackground')
   processedInBackground: boolean = false;

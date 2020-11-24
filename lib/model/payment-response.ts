@@ -60,7 +60,7 @@ export class PaymentResponse extends Jsonable {
   failureReason: FailureReason = undefined;
 
   @JsonProperty('failureMessage', String, true)
-  failureMessage: string = undefined;
+  failureMessage?: string = undefined;
 
   @JsonProperty('allTransactionsApproved')
   allTransactionsApproved: boolean = undefined;
@@ -78,10 +78,10 @@ export class PaymentResponse extends Jsonable {
   creationDateTimeMs: number = undefined;
 
   @JsonProperty('executedPreFlowApp', FlowAppInfo, true)
-  executedPreFlowApp: FlowAppInfo = undefined;
+  executedPreFlowApp?: FlowAppInfo = undefined;
 
   @JsonProperty('executedPostFlowApp', FlowAppInfo, true)
-  executedPostFlowApp: FlowAppInfo = undefined;
+  executedPostFlowApp?: FlowAppInfo = undefined;
 
   /**
      * Convert a JSON string into an {@link PaymentResponse} object if possible

@@ -28,16 +28,16 @@ export class FlowEvent extends Jsonable {
   data: AdditionalData = new AdditionalData();
 
   @JsonProperty('eventTrigger', String, true)
-  eventTrigger: string = undefined;
+  eventTrigger?: string = undefined;
 
   @JsonProperty('originatingRequestId', String, true)
-  originatingRequestId: string;
+  originatingRequestId?: string = undefined;
 
   @JsonProperty('source', String, true)
-  source: string;
+  source?: string = undefined;
 
   @JsonProperty('deviceId', String, true)
-  deviceId: string;
+  deviceId?: string = undefined;
 
   public static from(type: string, eventTrigger: string, data: AdditionalData = new AdditionalData()): FlowEvent {
     const flowEvent = new FlowEvent();

@@ -18,16 +18,16 @@ import { Jsonable } from '../jsonable';
 @JsonObject('ConfirmationInput')
 export class ConfirmationInput extends Jsonable {
   @JsonProperty('valueType')
-  public valueType: string = undefined;
+  valueType: string = undefined;
 
   @JsonProperty('maxValueLength')
-  public maxValueLength: number = -1;
+  maxValueLength: number = -1;
 
   @JsonProperty('minValueLength')
-  public minValueLength: number = -1;
+  minValueLength: number = -1;
 
   @JsonProperty('valueRegEx', String, true)
-  public valueRegEx: string = undefined;
+  valueRegEx?: string = undefined;
 
   /**
      * Convert a JSON string into an {@link ConfirmationInput} object if possible

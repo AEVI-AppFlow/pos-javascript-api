@@ -18,10 +18,10 @@ import { Jsonable } from '../jsonable';
 @JsonObject('ConfirmationResponse')
 export class ConfirmationResponse extends Jsonable {
   @JsonProperty('confirmationRequestId')
-  public confirmationRequestId: string = undefined;
+  confirmationRequestId: string = undefined;
 
   @JsonProperty('selectedValues')
-  public selectedValues: string[] = undefined;
+  selectedValues: string[] = undefined;
 
   /**
      * Convert a JSON string into an {@link ConfirmationResponse} object if possible

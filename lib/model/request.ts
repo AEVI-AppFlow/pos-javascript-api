@@ -37,16 +37,16 @@ export class Request extends Jsonable {
   requestData: AdditionalData = new AdditionalData();
 
   @JsonProperty('flowName', String, true)
-  flowName: string = undefined;
+  flowName?: string = undefined;
 
   @JsonProperty('deviceId', String, true)
-  deviceId: string = undefined;
+  deviceId?: string = undefined;
 
   @JsonProperty('source', String, true)
-  source: string = undefined;
+  source?: string = undefined;
 
   @JsonProperty('targetAppId', String, true)
-  targetAppId: string = undefined;
+  targetAppId?: string = undefined;
 
   @JsonProperty('processInBackground')
   processInBackground: boolean = false;
