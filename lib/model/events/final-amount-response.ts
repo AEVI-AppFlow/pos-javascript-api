@@ -25,10 +25,10 @@ export enum FinalAmountStatusType {
 @JsonObject('FinalAmountResponse')
 export class FinalAmountResponse extends Jsonable {
   @JsonProperty('type')
-  public type: FinalAmountStatusType = undefined;
+  type: FinalAmountStatusType = undefined;
 
   @JsonProperty('amount', Amounts, true)
-  public amount: Amounts;
+  amount?: Amounts;
 
   /**
      * Convert a JSON string into an {@link FinalAmountResponse} object if possible

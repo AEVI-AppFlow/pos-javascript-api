@@ -20,25 +20,25 @@ import { ConfirmationInput } from './confirmation-input';
 @JsonObject('ConfirmationRequest')
 export class ConfirmationRequest extends Jsonable {
   @JsonProperty('id')
-  public id: string = undefined;
+  id: string = undefined;
 
   @JsonProperty('type')
-  public type: string = undefined;
+  type: string = undefined;
 
   @JsonProperty('titleText', String, true)
-  public titleText: string = undefined;
+  titleText?: string = undefined;
 
   @JsonProperty('description', String, true)
-  public description: string = undefined;
+  description?: string = undefined;
 
   @JsonProperty('confirmationOptions', [ConfirmationOption], true)
-  public confirmationOptions: string = undefined;
+  confirmationOptions?: string = undefined;
 
   @JsonProperty('multiSelect')
-  public multiSelect: boolean = false;
+  multiSelect: boolean = false;
 
   @JsonProperty('confirmationInput')
-  public confirmationInput: ConfirmationInput = undefined;
+  confirmationInput: ConfirmationInput = undefined;
 
   /**
      * Convert a JSON string into an {@link ConfirmationRequest} object if possible

@@ -31,10 +31,10 @@ export class BasketItemModifier {
   type: string = undefined;
 
   @JsonProperty('amount', Number, true)
-  amount: number = undefined;
+  amount?: number = undefined;
 
   @JsonProperty('percentage', Number, true)
-  percentage: number = undefined;
+  percentage?: number = undefined;
 
   /**
      * Create an instance of a modifier.

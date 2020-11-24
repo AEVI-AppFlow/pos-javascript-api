@@ -18,7 +18,7 @@ import { Jsonable } from '../jsonable';
 @JsonObject('ProgressMessage')
 export class ProgressMessage extends Jsonable {
   @JsonProperty('messageText')
-  public messageText: string = undefined;
+  messageText: string = undefined;
 
   /**
      * Convert a JSON string into an {@link ProgressMessage} object if possible

@@ -28,16 +28,16 @@ export class Card {
   private static MAX_PAN_DIGITS_ALLOWED = 10;
 
   @JsonProperty('maskedPan', String, true)
-  maskedPan: string = undefined;
+  maskedPan?: string = undefined;
 
   @JsonProperty('cardholderName', String, true)
-  cardholderName: string = undefined;
+  cardholderName?: string = undefined;
 
   @JsonProperty('expiryDate', String, true)
-  expiryDate: string = undefined;
+  expiryDate?: string = undefined;
 
   @JsonProperty('cardToken', Token, true)
-  cardToken: Token = undefined;
+  cardToken?: Token = undefined;
 
   @JsonProperty('additionalData', AdditionalData)
   additionalData: AdditionalData = new AdditionalData();

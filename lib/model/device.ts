@@ -37,10 +37,10 @@ export class Device extends Jsonable {
   model: string = undefined;
 
   @JsonProperty('name', String, true)
-  name: string = undefined;
+  name?: string = undefined;
 
   @JsonProperty('location', String, true)
-  location: string = undefined;
+  location?: string = undefined;
 
   @JsonProperty('details', AdditionalData, true)
   details: AdditionalData = new AdditionalData();

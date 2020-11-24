@@ -22,7 +22,7 @@ export class AppFlowSettings {
   timeFormat: string = undefined;
 
   @JsonProperty('primaryCurrency', String, true)
-  primaryCurrency: string = undefined;
+  primaryCurrency?: string = undefined;
 
   @JsonProperty('primaryLanguage')
   primaryLanguage: string = undefined;

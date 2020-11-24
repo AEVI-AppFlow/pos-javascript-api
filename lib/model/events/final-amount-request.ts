@@ -18,7 +18,7 @@ import { Jsonable } from '../jsonable';
 @JsonObject('FinalAmountRequest')
 export class FinalAmountRequest extends Jsonable {
   @JsonProperty('timeout')
-  public timeout: number = -1;
+  timeout: number = -1;
 
   /**
      * Convert a JSON string into an {@link FinalAmountRequest} object if possible

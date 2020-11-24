@@ -31,7 +31,7 @@ export class TransactionResponse {
   id: string = undefined;
 
   @JsonProperty('card', Card, true)
-  card: Card = undefined;
+  card?: Card = undefined;
 
   @JsonProperty('outcome', String)
   outcome: TransactionResponseOutcome = undefined;
@@ -40,10 +40,10 @@ export class TransactionResponse {
   outcomeMessage: string = undefined;
 
   @JsonProperty('amounts', Amounts, true)
-  amounts: Amounts = undefined;
+  amounts?: Amounts = undefined;
 
   @JsonProperty('responseCode', String, true)
-  responseCode: string = undefined;
+  responseCode?: string = undefined;
 
   @JsonProperty('paymentMethod')
   paymentMethod: string = undefined;
@@ -52,8 +52,8 @@ export class TransactionResponse {
   references: AdditionalData = new AdditionalData();
 
   @JsonProperty('flowServiceId', String, true)
-  flowServiceId: string = undefined;
+  flowServiceId?: string = undefined;
 
   @JsonProperty('flowStage', String, true)
-  flowStage: string = undefined;
+  flowStage?: string = undefined;
 }
