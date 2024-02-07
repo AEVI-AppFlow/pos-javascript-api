@@ -1,5 +1,8 @@
 # AppFlow Typescript Payment Initiation API
 
+> [!IMPORTANT]
+> This repo is as of February 2024 deprecated and further development will take place in a private Aevi repository. Please contact Aevi for any questions or concerns.
+
 This project is a Typescript implementation of the original Java based AppFlow API.
 
 It is intended to be a 1-to-1 mapping from the Java API so anyone switching from Java to Javascript should find this API extremely similar to use.
